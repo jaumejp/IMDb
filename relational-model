@@ -1,0 +1,19 @@
+
+## Relational Model
+movie (id, title, summary, description, rating, cover_image, director_id)
+* PK: (id)
+* FK: (director_id)
+
+director (id, name, year_of_birth)
+* PK: (id)
+
+genres_of_movies (movie_id, gener_id)
+* PK: (move_id, genres_id)
+* FK: (move_id), (genres_id)
+
+genere (id, genere)
+* PK: (id)
+
+screen_shots (id, url, movie_id)
+* PK: (id)
+* FK: (movie_id)
