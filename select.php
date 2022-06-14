@@ -2,12 +2,12 @@
     // Instance of PDO class
     // Parametres of the constructor (host, nom BBDD, user, pwd)
 
-    try {
+    // try {
 
-        $base = new PDO('mysql:host=localhost; dbname=imdb', 'root','');
-    } catch {
+    //     $base = new PDO('mysql:host=localhost; dbname=imdb', 'root','');
+    // } catch {
         
-    }
+    // }
     
 
 
