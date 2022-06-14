@@ -71,7 +71,6 @@ section {
 .movie-card, 
 .searcher-card,
 .add-movie {
-    width: 100%;
     background-color: #fff;
     border-radius: 15px;
     padding: 20px;
@@ -85,6 +84,7 @@ section {
     display: flex;
     margin: 0;
     gap: 1em;
+    width: 100%;
 
 }
 
@@ -260,4 +260,60 @@ section.create-movie {
 
 .pop-up-container.show .wrong {
     border: 1px solid lightcoral;
+}
+
+/*
+===========================================================================
+
+===========================================================================
+*/
+
+@media (max-width: 1270px) {
+    .movie-card {
+        grid-template-columns: 1fr;
+        margin: 0;
+        gap: 0;
+    }
+    section {
+        padding: 20px;
+    }
+    .movie-card .main {
+        flex-direction: column;
+        align-items: center;
+    }
+    .info {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .genres ul {
+        justify-content: center;
+        align-items: center;
+    }
+    .movie-card img {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .description {
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* Mobile Searcher section */
+
+    .searcher-card {
+        flex-direction: column;
+        width: 100%;
+    }
+    .searcher-card img {
+        margin: 0;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+    }
 }
