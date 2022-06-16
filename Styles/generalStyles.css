@@ -52,3 +52,12 @@ footer p {
     text-align: center;
 }
 
+@media (max-width: 1270px) {
+    nav ul {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+    }
+}

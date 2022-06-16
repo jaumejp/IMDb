@@ -61,7 +61,7 @@ section {
     font-weight: normal;   
 }
 
-.genres ul {
+/* .genres ul {
     display: flex;
     gap: 1em;
     flex-wrap: wrap;
@@ -73,7 +73,7 @@ section {
     font-size: smaller;
     border-radius: 15px;
     color: #aaa;
-}
+} */
 
 .rating {
     background-color: lightgreen;
@@ -232,10 +232,10 @@ section.create-movie {
         justify-content: center;
         text-align: center;
     }
-    .genres ul {
+    /* .genres ul {
         justify-content: center;
         align-items: center;
-    }
+    } */
     .movie-card img {
         margin: 0;
         margin-bottom: 20px;
@@ -255,11 +255,11 @@ section.create-movie {
         margin: 0;
     }
 
-    nav ul {
+    /* nav ul {
         display: none;
     }
 
     header {
         justify-content: center;
-    }
+    } */
 }
