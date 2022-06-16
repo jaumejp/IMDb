@@ -134,6 +134,11 @@ section {
     border: none;
 }
 
+.btn a {
+    text-decoration: none;
+    color: #fff;
+}
+
 
 section.pop-up-container,
 section.create-movie {
