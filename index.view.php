@@ -12,13 +12,16 @@
     </style>
 </head>
 <body>
-
+    
     <?php foreach($listOfMovies as $movie) : ?>
         <h1> <?= $movie->getTitle() ?> </h1>
         <p> <?= $movie->getDescription() ?> </p>
         <img src="<?= $movie->getCoverImage() ?>" alt="<?= $movie->getTitle() ?>">
         <p> <?= $movie->getRating() ?> </p>
     <?php endforeach ?>
+
+    
+
 
 </body>
 </html>

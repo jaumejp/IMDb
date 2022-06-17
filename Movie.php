@@ -8,17 +8,19 @@
         protected $description;
         protected $rating;
         protected $cover_image;
-        protected $director_id;
+        protected $director;
         protected $summary;
+        protected $genres;
+        protected $screen_shots;
+
 
         // Constructor:
-        public function __construct($id, $title, $description, $rating, $cover_image, $director_id, $summary) {
+        public function __construct($id, $title, $description, $rating, $cover_image, $summary) {
             $this->id = $id;
             $this->title = $title;
             $this->description = $description;
             $this->rating = $rating;
             $this->cover_image = $cover_image;
-            $this->director_id = $director_id;
             $this->summary = $summary;
         }
 
@@ -39,10 +41,37 @@
             return $this->cover_image;
         }
 
-
-
-        public function setRating($newRating) {
-            $this->rating = newRating;
+        public function getSummary() {
+            return $this->summary;
         }
+
+
+        public function getDirector() {
+            return $this->director;
+        }
+        public function setDirector($director) {
+            $this->director = $director;
+        }
+
+        public function setGenres($genres) {
+            $this->genres = $genres;
+        }
+        public function getGenres() {
+            return $this->genres;
+        }
+
+        public function setScreenShots($screen_shotsList) {
+            $this->screen_shots = $screen_shotsList;
+        }
+
+        public function getScreenShots() {
+            return $this->screen_shots;
+        }
+
+        // "director": "Christopher Nolan",
+        // "genres": ["Action", "Adventure", "Sci-Fi", "Thriller"],
+        // "screenshots": ["Screen1", "Screen2"]
+
+
 
     }
