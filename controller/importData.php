@@ -69,6 +69,35 @@
         
     }
 
-    
+
+
+
+    // List of directors: 
+    $statement = $conn->prepare("SELECT * FROM directors"); 
+    $statement->execute(); 
+
+    // Generate list of directors:
+    $listOfDirectors = array();
+
+    $directors = $statement->fetchAll();
+
+    // while ($movie = $statement->fetch()) {
+    foreach ($directors as $director) { 
+        $listOfDirectors[] = $director["name"];
+    }
+
+    /// List of Genres
+
+    $statement = $conn->prepare("SELECT * FROM genres"); 
+    $statement->execute(); 
+
+    $listOfGenres = array();
+
+    $genres = $statement->fetchAll();
+
+    // while ($movie = $statement->fetch()) {
+    foreach ($genres as $genre) { 
+        $listOfGenres[] = $genre["genere"];
+    }    
 
 

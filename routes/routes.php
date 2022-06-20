@@ -1,12 +1,29 @@
 <?php
 
-    $routes = [
-            '' => 'controller/homeController.php',
-            'api/movies' => 'controller/showJsonMovies.php',
-            'notFound' => 'views/notFound.view.php',
-            'form' => 'views/form.view.php',
-            'names' => 'views/addName.view.php',
-            'importData' => 'controller/importData.php',
-            'readjson' => 'controller/readjson.php',
+    // $routes = [
+    //         '' => 'controller/homeController.php',
+    //         'api/movies' => 'controller/showJsonMovies.php',
+    //         'notFound' => 'views/notFound.view.php',
+    //         'form' => 'views/form.view.php',
+    //         'addMovie' => 'controller/addMovieController.php',
+    //         'importData' => 'controller/importData.php',
+    //         'readjson' => 'controller/readjson.php',
 
-        ];
+    //     ]; 
+
+    // $router->define($routes);
+
+    $router->get('', 'controller/homeController.php');
+
+    $router->get('api/movies', 'controller/showJsonMovies.php');
+
+    $router->get('notFound', 'views/notFound.view.php');
+
+    $router->get('addMovie', 'views/form.view.php');
+
+    $router->post('addMovie', 'controller/addMovieController.php');
+
+    $router->get('importData', 'controller/importData.php');
+
+    $router->get('readjson', 'controller/readjson.php');
+
