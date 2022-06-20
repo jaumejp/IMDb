@@ -1,8 +1,8 @@
 <?php
 
-    require 'dataBaseConnection.php';
-    require 'Movie.php';
-    require 'Director.php';
+    require 'controller/dataBaseConnection.php';
+    require 'controller/Movie.php';
+    require 'controller/Director.php';
 
     // Import Movies Table:
     // Get movies data from BBDD:

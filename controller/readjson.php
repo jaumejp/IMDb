@@ -22,15 +22,15 @@
   
     // Get data from JSON:
     // Directors
-    $json_data = file_get_contents("directors.json");
+    $json_data = file_get_contents("data/directors.json");
     $directors = json_decode($json_data, true);
     
     // Genres
-    $json_data = file_get_contents("genres.json");
+    $json_data = file_get_contents("data/genres.json");
     $genres = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
     // Movies
-    $json_data = file_get_contents("movies.json");
+    $json_data = file_get_contents("data/movies.json");
     $movies = json_decode($json_data, JSON_OBJECT_AS_ARRAY);
 
     // Add values from JSON to BBDD:

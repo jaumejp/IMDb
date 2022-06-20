@@ -2,7 +2,7 @@
 <?php
 
     // Get data from BBDD
-    require 'importData.php';
+    require 'controller/importData.php';
 
     $jsonData = array();
 

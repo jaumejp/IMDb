@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-    
+
     <?php foreach($listOfMovies as $movie) : ?>
         <h1> <?= $movie->getTitle() ?> </h1>
         <p> <?= $movie->getDescription() ?> </p>
@@ -21,7 +21,5 @@
     <?php endforeach ?>
 
     
-
-
 </body>
 </html>
