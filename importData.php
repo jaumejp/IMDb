@@ -48,40 +48,26 @@
         // Add the array to the movies list: 
         $movieAux->setScreenShots($screnShotsArray);
 
-
+ 
         
         // Select the genres of the movie: 
-        // s'ha de fer un select de la id de la pelicula i després fer un 
-        // select del no del genere que té aquest id. 
-        $statement = $conn->prepare("SELECT url FROM screen_shots WHERE movie_id = :movie_id");
+        $statement = $conn->prepare("SELECT genere FROM genres WHERE id in (SELECT genre_id FROM genres_of_movies WHERE movie_id = :movie_id)");
         $statement->bindParam(":movie_id", $movie['id']);
         $statement->execute();  
-        $screenShots = $statement->fetchAll();
+        $genres = $statement->fetchAll();
+
+        // Create array of genres and add it to the movie object:
+        $genresArray = array();
+        foreach($genres as $genre) {
+            $genresArray[] = $genre["genere"];
+        }
+
+        $movieAux->setGenres($genresArray);
 
         // Add movie to list of movies:
         $listOfMovies[] = $movieAux;
         
     }
-
-
-
-
-    // Import directors Table: 
-
-
-
-
-    // $listOfDirectors = array();
-
-    // while ($director = $statement->fetch()) {
-        
-    //     $directorAux = new Director($director["id"], $director["name"], $director["year_of_birth"]);
-        
-    //     $listOfDirectors[] = $directorAux;
-    // }
-
-
-    
 
     
 
