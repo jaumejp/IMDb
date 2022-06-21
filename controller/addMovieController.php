@@ -4,9 +4,24 @@
     $resume = $_POST["resume"];
     $description = $_POST["description"];
     $rating = $_POST["rating"];
-    $coverImage = $_POST["cover-image"];
     $directorName = $_POST["director-name"];
     $tags = $_POST["tags"];    
+    $file_name = $_FILES["cover-image"]["name"];
+    $temp= explode('.',$file_name);
+    $extension = end($temp);
+
+    // allowed file type: 
+    $allowed_exs = array("jpg", "jpeg", "png");
+
+    if (in_array($extension, $allowed_exs)) {
+        // Crear una carpeta
+        // Crear un nom de foto única
+        $newImageName = uniqid("IMG-", true).'.'.$extension;
+        $imgUploadPath = 'uploads/'.$newImageName;
+        move_uploaded_file($_FILES["cover-image"]["tmp_name"], $imgUploadPath);
+    }
+
+
 
     if (!inputsFilled($title, $resume, $description, $rating, $coverImage, $directorName, $tags)) {
         $error = "Please fill all the fields";

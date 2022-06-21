@@ -30,7 +30,7 @@
     <input type="number" min="0" max="10" name="rating"></input>
 
     <label for="">Cover Image</label>
-    <input type="file" accept="image/png, image/jpeg"> name="cover-image"></input>
+    <input type="file" accept="image/png, image/jpeg" name="cover-image"></input>
 
     <label for="">Director's name</label>
     <select name="director-name">
