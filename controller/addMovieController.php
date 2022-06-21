@@ -1,8 +1,7 @@
 <?php
 
     session_start();
-    $_SESSION['flash_message'] = 'I am flash'; 
-
+   
     require 'controller/formValidationFunctions.php';
     require 'importData.php';
 
@@ -24,19 +23,20 @@
     } else if (!tagsOK($_POST["tags"], $listOfGenres)) {
         $error = "Enter a valid genres";
 
+    } else if (!screenShotsOK($_FILES["screen_shots"])) {
+        $error = "Upload valid screen shots";
     } else {
         // Add data to BBDD
         var_dump("all files are OK!");
-        //var_dump($_POST['tags']); die();       
 
         $title = $_POST["title"];
         $description = $_POST["description"];
         $rating = $_POST["rating"];
-        $coverImageUrl = getLocalImagePath($_FILES["cover-image"]);
+        $coverImageUrl = getLocalImagePath($_FILES["cover-image"], "coverImages");
         $resume = $_POST["resume"];
         $directorName = $_POST["director-name"];
         $tags = $_POST["tags"];   
-        
+
         // director id
         $statement = $conn->prepare("SELECT id FROM directors WHERE name = :movie_director");
         $statement->bindParam(":movie_director", $directorName);
@@ -70,19 +70,26 @@
             $insertStatement->execute();
         }
 
+        // Insert screen shots to database: 
+        $insertScreenShot = $conn->prepare("INSERT INTO screen_shots (url, movie_id) VALUES (:url, :movie_id)");
+        
+        for ($i = 0; $i < sizeof($_FILES["screen_shots"]["name"]); $i++) {
+            $screenShotName = $_FILES["screen_shots"]["name"][$i];
+            $tempUrl = $_FILES["screen_shots"]["tmp_name"][$i];
+            $screenShotUrl = getLocalScreenShotPath($screenShotName, $tempUrl);
+            $insertScreenShot->bindParam(":url", $screenShotUrl);
+            $insertScreenShot->bindParam(":movie_id", $movieId);
+            $insertScreenShot->execute();
+        }
+
+
+
     }
 
-    
-    if ($error) {
-        echo $error;
-    }
+    $_SESSION['flash_message'] = $error; 
 
     //header("Location: /movies/create?errMsg=$error");
     header("Location: /movies/create");
-
-    
-    // Return to form: 
-
 
 
 

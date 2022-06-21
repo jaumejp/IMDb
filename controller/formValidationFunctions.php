@@ -46,7 +46,7 @@
     // Validate image: 
     function imageOK($image) {
         // Check if the image exists:
-        if (empty($_FILES["cover-image"]["size"])) {
+        if (empty($image["size"])) {
             return false; 
         }
         // Check if the image has one allowed extension: 
@@ -64,7 +64,7 @@
 
     }
 
-    function getLocalImagePath($image) {
+    function getLocalImagePath($image, $directory) {
 
         // Check if the image has the correct extension:
         $file_name = $image["name"];
@@ -76,10 +76,44 @@
 
         // create a unique id name for the image and move it to uploads directory:
         $newImageName = uniqid("IMG-", true).'.'.$extension;
-        $imgUploadPath = 'uploads/'.$newImageName;
+        $imgUploadPath = 'uploads/'.$directory.'/'.$newImageName;
         move_uploaded_file($image["tmp_name"], $imgUploadPath);
 
         return $imgUploadPath;
         
+    }
+
+    function screenShotsOK($screenShots) {
+
+        // Check if the image exists:
+        if (empty($screenShots["size"])) {
+            return false; 
+        }
+        // Check if the image has one allowed extension:
+        foreach($screenShots["name"] as $screenShotName) {             
+            $file_name = $screenShotName;
+            $temp= explode('.',$file_name);
+            $extension = end($temp);
+            // allowed file type: 
+            $allowed_exs = array("jpg", "jpeg", "png");
+            if (!in_array($extension, $allowed_exs)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function getLocalScreenShotPath($screenShotName, $tempUrl) {
+        $file_name = $screenShotName;
+        $temp= explode('.',$file_name);
+        $extension = end($temp);
+
+        $newImageName = uniqid("IMG-", true).'.'.$extension;
+        $imgUploadPath = 'uploads/screenShots/'.$newImageName;
+        move_uploaded_file($tempUrl, $imgUploadPath);
+
+        return $imgUploadPath;
+
     }
     

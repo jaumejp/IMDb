@@ -60,6 +60,8 @@
         <?php endforeach ?>
     </div>
 
+    <label for="screen_shots">Screen Shots:</label>
+    <input type="file" name="screen_shots[]" multiple></input>
 
     <button type="submit">Submit</button>
 
