@@ -19,7 +19,6 @@
         <img src="<?= $movie->getCoverImage() ?>" alt="<?= $movie->getTitle() ?>">
         <p> <?= $movie->getRating() ?> </p>
     <?php endforeach ?>
-
     
 </body>
 </html>

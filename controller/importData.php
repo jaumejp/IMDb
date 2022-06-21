@@ -100,4 +100,3 @@
         $listOfGenres[] = $genre["genere"];
     }    
 
-

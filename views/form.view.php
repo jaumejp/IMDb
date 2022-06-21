@@ -11,11 +11,18 @@
         grid-template-columns: repeat(5, 1fr);
         gap: 2em;
     }
+    p {
+        color: red;
+    }
 </style>
 
 <?php require 'controller/importData.php' ?>
 
-<form method="post" enctype='multipart/form-data'>
+<?php if(isset($_GET['errMsg'])): ?>
+    <p> <?= $_GET['errMsg'] ?> </p>
+<?php endif ?>
+
+<form method="post" enctype='multipart/form-data' action="/api/movies">
 
     <label for="">Movie title</label>
     <input name="title"></input>
@@ -27,10 +34,10 @@
     <textarea name="description" rows="4" cols="50"></textarea>
 
     <label for="">Rating</label>
-    <input type="number" min="0" max="10" name="rating"></input>
+    <input type="number" min="0" max="10" step="0.1" name="rating"></input>
 
     <label for="">Cover Image</label>
-    <input type="file" accept="image/png, image/jpeg" name="cover-image"></input>
+    <input type="file" name="cover-image"></input>
 
     <label for="">Director's name</label>
     <select name="director-name">

@@ -19,9 +19,9 @@
 
     $router->get('notFound', 'views/notFound.view.php');
 
-    $router->get('addMovie', 'views/form.view.php');
+    $router->get('movies/create', 'views/form.view.php');
 
-    $router->post('addMovie', 'controller/addMovieController.php');
+    $router->post('api/movies', 'controller/addMovieController.php'); 
 
     $router->get('importData', 'controller/importData.php');
 

@@ -1,60 +1,81 @@
 <?php
+
     require 'controller/formValidationFunctions.php';
-    $title = $_POST["title"];
-    $resume = $_POST["resume"];
-    $description = $_POST["description"];
-    $rating = $_POST["rating"];
-    $directorName = $_POST["director-name"];
-    $tags = $_POST["tags"];    
-    $file_name = $_FILES["cover-image"]["name"];
-    $temp= explode('.',$file_name);
-    $extension = end($temp);
+    require 'importData.php';
 
-    // allowed file type: 
-    $allowed_exs = array("jpg", "jpeg", "png");
-
-    if (in_array($extension, $allowed_exs)) {
-        // Crear una carpeta
-        // Crear un nom de foto única
-        $newImageName = uniqid("IMG-", true).'.'.$extension;
-        $imgUploadPath = 'uploads/'.$newImageName;
-        move_uploaded_file($_FILES["cover-image"]["tmp_name"], $imgUploadPath);
-    }
-
-
-
-    if (!inputsFilled($title, $resume, $description, $rating, $coverImage, $directorName, $tags)) {
+    
+    if (!allInputsFilled($_POST["title"], $_POST["resume"], $_POST["description"])) {
         $error = "Please fill all the fields";
 
-    } else if (!ratingOnRange($rating)) {
+    } else if (!ratingOK($_POST["rating"])) {
         $error = "Rating must be between 0 and 10";
 
-    } else if (false && empty($_POST["cover_image"])) {
+    } else if (!imageOK($_FILES["cover-image"])) {
         $error = "Upload a valid cover image";
 
-    } else if(!directorNameOK($directorName)) {
+    } else if(!directorNameOK($_POST["director-name"], $listOfDirectors)) {
         $error = "Enter a valid director's name";
 
-    } else if (!tagsOK($tags)) {
+    } else if(!isset($_POST["tags"])) {
+        $error = "Enter at least one tag";
+
+    } else if (!tagsOK($_POST["tags"], $listOfGenres)) {
         $error = "Enter a valid genres";
+
     } else {
-    
         // Add data to BBDD
-        $statement = $conn->prepare("INSERT INTO movies () VALUES (:title, :description, :rating, :cover_image, :director_id, :summary)");
-        $statement->bindParam(":title", $title);
-        $statement->bindParam(":description", $title);
-        $statement->bindParam(":cover_image", $title);
-        $statement->bindParam(":director_id", $title);
-        $statement->bindParam(":summary", $title);
-        $statement->execute();
+        var_dump("all files are OK!");
+        //var_dump($_POST['tags']); die();       
+
+        $title = $_POST["title"];
+        $description = $_POST["description"];
+        $rating = $_POST["rating"];
+        $coverImageUrl = getLocalImagePath($_FILES["cover-image"]);
+        $resume = $_POST["resume"];
+        $directorName = $_POST["director-name"];
+        $tags = $_POST["tags"];   
         
-        // Insert a les altres taules
+        // director id
+        $statement = $conn->prepare("SELECT id FROM directors WHERE name = :movie_director");
+        $statement->bindParam(":movie_director", $directorName);
+        $statement->execute();   
+        $director = $statement->fetch();
+        $directorId = $director["id"];
+      
+        // Insert movie to database:
+        $statement = $conn->prepare("INSERT INTO movies (title, description, rating, cover_image, director_id, summary) VALUES (:title, :description, :rating, :cover_image, :director_id, :summary)");
+        $statement->bindParam(":title", $title);
+        $statement->bindParam(":description", $description);
+        $statement->bindParam(":rating", $rating);
+        $statement->bindParam(":cover_image", $coverImageUrl);
+        $statement->bindParam(":director_id", $directorId);
+        $statement->bindParam(":summary", $resume);
+        $statement->execute();
+        $movieId = $conn->lastInsertId();
+
+        // Insert genres of the movie to database:
+        $insertStatement = $conn->prepare("INSERT INTO genres_of_movies (movie_id, genre_id) VALUES (:movie_id, :genre_id)");
+        foreach($tags as $tag) {
+            $statement = $conn->prepare("SELECT id FROM genres WHERE genere = :genre");
+            $statement->bindParam(":genre", $tag);
+            $statement->execute();  
+            $genre = $statement->fetch(); 
+            $gensreId = $genre["id"];
+            
+            // Execute insert: 
+            $insertStatement->bindParam(":movie_id", $movieId);
+            $insertStatement->bindParam(":genre_id", $gensreId);
+            $insertStatement->execute();
+        }
+
     }
 
     
     if ($error) {
         echo $error;
     }
+
+    header("Location: /movies/create?errMsg=$error");
 
     
     // Return to form: 

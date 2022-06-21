@@ -1,18 +1,12 @@
 <?php
-
-    require 'importData.php';
-
+    
     // Check if all inputs are filled:
-    function inputsFilled($title, $resume, $description, $rating, $coverImage, $directorName, $tags) {
+    function allInputsFilled($title, $resume, $description) {
         if 
         (
             empty($title) || 
             empty($resume) || 
-            empty($description) || 
-            empty($rating) || 
-            empty($coverImage) || 
-            empty($directorName) || 
-            empty($tags)
+            empty($description)
         ) {
             return false;
         }
@@ -22,15 +16,17 @@
     }
 
     // Check if the rating is between 0 and 10: 
-    function ratingOnRange($rating) {
-        if ($rating > 0 || $rating < 10) {
-            return true;
+    function ratingOK($rating) {
+        if (empty($rating)) {
+            return false;
+        } else if ($rating < 0 || $rating > 10) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     // Validate director's name:    
-    function directorNameOK($directorsName) {
+    function directorNameOK($directorsName, $listOfDirectors) {
         if (in_array($directorsName, $listOfDirectors)) {
             return true;
         }
@@ -38,12 +34,52 @@
     }
 
     // Validate the tags: 
-    function tagsOK($tags) {
+    function tagsOK($tags, $listOfGenres) {
         foreach($tags as $tag) {
             if (!in_array($tag, $listOfGenres)) {
                 return false;
             }
         }
         return true;
+    }
+
+    // Validate image: 
+    function imageOK($image) {
+        // Check if the image exists:
+        if (empty($_FILES["cover-image"]["size"])) {
+            return false; 
+        }
+        // Check if the image has one allowed extension: 
+        $file_name = $image["name"];
+        $temp= explode('.',$file_name);
+        $extension = end($temp);
+        // allowed file type: 
+        $allowed_exs = array("jpg", "jpeg", "png");
+        if (in_array($extension, $allowed_exs)) {
+            return true;
+        }
+    
+        // The uploaded file is not empty but has a invalid extension:
+        return false;  
+
+    }
+
+    function getLocalImagePath($image) {
+
+        // Check if the image has the correct extension:
+        $file_name = $image["name"];
+        $temp= explode('.',$file_name);
+        $extension = end($temp);
+
+        // allowed file type: 
+        $allowed_exs = array("jpg", "jpeg", "png");
+
+        // create a unique id name for the image and move it to uploads directory:
+        $newImageName = uniqid("IMG-", true).'.'.$extension;
+        $imgUploadPath = 'uploads/'.$newImageName;
+        move_uploaded_file($image["tmp_name"], $imgUploadPath);
+
+        return $imgUploadPath;
+        
     }
     
