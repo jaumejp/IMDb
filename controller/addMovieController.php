@@ -1,9 +1,11 @@
 <?php
 
+    session_start();
+    $_SESSION['flash_message'] = 'I am flash'; 
+
     require 'controller/formValidationFunctions.php';
     require 'importData.php';
 
-    
     if (!allInputsFilled($_POST["title"], $_POST["resume"], $_POST["description"])) {
         $error = "Please fill all the fields";
 
@@ -75,7 +77,8 @@
         echo $error;
     }
 
-    header("Location: /movies/create?errMsg=$error");
+    //header("Location: /movies/create?errMsg=$error");
+    header("Location: /movies/create");
 
     
     // Return to form: 

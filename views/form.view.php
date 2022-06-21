@@ -15,11 +15,14 @@
         color: red;
     }
 </style>
+<?php session_start(); ?>
 
 <?php require 'controller/importData.php' ?>
 
-<?php if(isset($_GET['errMsg'])): ?>
-    <p> <?= $_GET['errMsg'] ?> </p>
+<?php if(isset($_SESSION['flash_message'])): ?>
+    <?php $message = $_SESSION['flash_message']; ?>
+    <?php unset($_SESSION['flash_message']); ?>
+    <p> <?= $message ?> </p>
 <?php endif ?>
 
 <form method="post" enctype='multipart/form-data' action="/api/movies">
