@@ -14,13 +14,13 @@
 
     
 
-    require 'routes/Router.php';
+    require 'router/Router.php';
 
-    require 'routes/Request.php';
+    require 'router/Request.php';
     
     $router = new Router;
 
-    require 'routes/routes.php';
+    require 'router/routes.php';
     
     $router = Router::load('routes.php');
     

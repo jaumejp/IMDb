@@ -19,14 +19,16 @@
 
     $router->get('notFound', 'views/notFound.view.php');
 
-    $router->get('movies/create', 'views/form.view.php');
+    $router->get('movies/create', 'views/addMovieForm.view.php');
 
     $router->post('api/movies', 'controller/addMovieController.php'); 
 
     $router->get('importData', 'controller/importData.php');
 
-    $router->get('readjson', 'controller/readjson.php');
+    $router->get('loadDatabase', 'database/loadDatabaseFromJson.php');
 
     $router->get('movie', 'views/movie.view.php');
 
     $router->get('movie/delete', 'controller/deleteMovieController.php');
+
+    $router->get('movies/search', 'views/searchMovieForm.php');

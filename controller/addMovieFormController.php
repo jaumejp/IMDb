@@ -4,4 +4,4 @@
 
     $listOfMovies = fetchMovies();
     
-    require 'views/home.view.php';
+    require 'views/addMovieForm.view.php';

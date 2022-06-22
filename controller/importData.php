@@ -1,102 +1,102 @@
 <?php
 
-    require 'controller/dataBaseConnection.php';
-    require 'controller/Movie.php';
-    require 'controller/Director.php';
+    // require 'database/dataBaseConnection.php';
+    // require 'models/Movie.php';
+    // require 'models/Director.php';
 
-    // Import Movies Table:
-    // Get movies data from BBDD:
-    $statement = $conn->prepare("SELECT * FROM movies"); 
-    $statement->execute();  
+    // // Import Movies Table:
+    // // Get movies data from BBDD:
+    // $statement = $conn->prepare("SELECT * FROM movies"); 
+    // $statement->execute();  
 
-    // Generate list of Movies:
-    $listOfMovies = array();
+    // // Generate list of Movies:
+    // $listOfMovies = array();
 
-    // fetch all movies at the same time:
-    $movies = $statement->fetchAll();
-    //var_dump($movies); die();
+    // // fetch all movies at the same time:
+    // $movies = $statement->fetchAll();
+    // //var_dump($movies); die();
 
-    // fetch movie by movie:
+    // // fetch movie by movie:
 
-    // while ($movie = $statement->fetch()) {
-    foreach ($movies as $movie) {
+    // // while ($movie = $statement->fetch()) {
+    // foreach ($movies as $movie) {
 
-        // Create aux movie to push it to the array:
-        $movieAux = new Movie($movie["id"], $movie["title"], $movie["description"], $movie["rating"], $movie["cover_image"], $movie["summary"]);
+    //     // Create aux movie to push it to the array:
+    //     $movieAux = new Movie($movie["id"], $movie["title"], $movie["description"], $movie["rating"], $movie["cover_image"], $movie["summary"]);
         
-        // Create director object
-        $statement = $conn->prepare("SELECT * FROM directors WHERE id = :movie_director");
-        $statement->bindParam(":movie_director", $movie['director_id']);
-        $statement->execute();  
-        $director = $statement->fetch();        
-        $directorAux = new Director($director['id'], $director['name'], $director['year_of_birth']);
+    //     // Create director object
+    //     $statement = $conn->prepare("SELECT * FROM directors WHERE id = :movie_director");
+    //     $statement->bindParam(":movie_director", $movie['director_id']);
+    //     $statement->execute();  
+    //     $director = $statement->fetch();        
+    //     $directorAux = new Director($director['id'], $director['name'], $director['year_of_birth']);
         
-        // Put the object director to the Movie: 
-        $movieAux->setDirector($directorAux);
+    //     // Put the object director to the Movie: 
+    //     $movieAux->setDirector($directorAux);
 
-        // Put the screen_shots to the Movie: 
-        //var_dump($movie);
-        $statement = $conn->prepare("SELECT url FROM screen_shots WHERE movie_id = :movie_id");
-        $statement->bindParam(":movie_id", $movie['id']);
-        $statement->execute();  
-        $screenShots = $statement->fetchAll(); 
-        // Create array with screen shots data:
-        $screnShotsArray = array();
-        foreach($screenShots as $screenShot) {
-            $screnShotsArray[] = $screenShot["url"];
-        }
-        // Add the array to the movies list: 
-        $movieAux->setScreenShots($screnShotsArray);
+    //     // Put the screen_shots to the Movie: 
+    //     //var_dump($movie);
+    //     $statement = $conn->prepare("SELECT url FROM screen_shots WHERE movie_id = :movie_id");
+    //     $statement->bindParam(":movie_id", $movie['id']);
+    //     $statement->execute();  
+    //     $screenShots = $statement->fetchAll(); 
+    //     // Create array with screen shots data:
+    //     $screnShotsArray = array();
+    //     foreach($screenShots as $screenShot) {
+    //         $screnShotsArray[] = $screenShot["url"];
+    //     }
+    //     // Add the array to the movies list: 
+    //     $movieAux->setScreenShots($screnShotsArray);
 
  
         
-        // Select the genres of the movie: 
-        $statement = $conn->prepare("SELECT genere FROM genres WHERE id in (SELECT genre_id FROM genres_of_movies WHERE movie_id = :movie_id)");
-        $statement->bindParam(":movie_id", $movie['id']);
-        $statement->execute();  
-        $genres = $statement->fetchAll();
+    //     // Select the genres of the movie: 
+    //     $statement = $conn->prepare("SELECT genere FROM genres WHERE id in (SELECT genre_id FROM genres_of_movies WHERE movie_id = :movie_id)");
+    //     $statement->bindParam(":movie_id", $movie['id']);
+    //     $statement->execute();  
+    //     $genres = $statement->fetchAll();
 
-        // Create array of genres and add it to the movie object:
-        $genresArray = array();
-        foreach($genres as $genre) {
-            $genresArray[] = $genre["genere"];
-        }
+    //     // Create array of genres and add it to the movie object:
+    //     $genresArray = array();
+    //     foreach($genres as $genre) {
+    //         $genresArray[] = $genre["genere"];
+    //     }
 
-        $movieAux->setGenres($genresArray);
+    //     $movieAux->setGenres($genresArray);
 
-        // Add movie to list of movies:
-        $listOfMovies[] = $movieAux;
+    //     // Add movie to list of movies:
+    //     $listOfMovies[] = $movieAux;
         
-    }
+    // }
 
 
 
 
-    // List of directors: 
-    $statement = $conn->prepare("SELECT * FROM directors"); 
-    $statement->execute(); 
+    // // List of directors: 
+    // $statement = $conn->prepare("SELECT * FROM directors"); 
+    // $statement->execute(); 
 
-    // Generate list of directors:
-    $listOfDirectors = array();
+    // // Generate list of directors:
+    // $listOfDirectors = array();
 
-    $directors = $statement->fetchAll();
+    // $directors = $statement->fetchAll();
 
-    // while ($movie = $statement->fetch()) {
-    foreach ($directors as $director) { 
-        $listOfDirectors[] = $director["name"];
-    }
+    // // while ($movie = $statement->fetch()) {
+    // foreach ($directors as $director) { 
+    //     $listOfDirectors[] = $director["name"];
+    // }
 
-    /// List of Genres
+    // /// List of Genres
 
-    $statement = $conn->prepare("SELECT * FROM genres"); 
-    $statement->execute(); 
+    // $statement = $conn->prepare("SELECT * FROM genres"); 
+    // $statement->execute(); 
 
-    $listOfGenres = array();
+    // $listOfGenres = array();
 
-    $genres = $statement->fetchAll();
+    // $genres = $statement->fetchAll();
 
-    // while ($movie = $statement->fetch()) {
-    foreach ($genres as $genre) { 
-        $listOfGenres[] = $genre["genere"];
-    }    
+    // // while ($movie = $statement->fetch()) {
+    // foreach ($genres as $genre) { 
+    //     $listOfGenres[] = $genre["genere"];
+    // }    
 

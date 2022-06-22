@@ -17,7 +17,11 @@
 </style>
 <?php session_start(); ?>
 
-<?php require 'controller/importData.php' ?>
+<?php require 'database/fetchDirectors.php' ?>
+<?php $listOfDirectors = fetchDirectors() ?>
+
+<?php require 'database/fetchGenres.php' ?>
+<?php $listOfGenres = fetchGenres() ?>
 
 <?php if(isset($_SESSION['flash_message'])): ?>
     <?php $message = $_SESSION['flash_message']; ?>

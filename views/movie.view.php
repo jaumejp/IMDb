@@ -1,6 +1,6 @@
 <?php 
 
-    require 'controller/dataBaseConnection.php'; 
+    require 'database/dataBaseConnection.php'; 
 
     // With get parameters on the url: http://imbd.test/movie?id=171
     $id = $_GET["id"];
