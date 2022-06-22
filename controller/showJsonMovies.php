@@ -19,7 +19,7 @@
 
         $movieAux = array(
             'title' => $movieTitle, 
-            'resue' => $movieSummary,
+            'resueme' => $movieSummary,
             'description' => $movieDescription,
             'rating' => $movieRating,
             'director' => $movieDirector,

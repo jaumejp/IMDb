@@ -27,3 +27,6 @@
 
     $router->get('readjson', 'controller/readjson.php');
 
+    $router->get('movie', 'views/movie.view.php');
+
+    $router->get('movie/delete', 'controller/deleteMovieController.php');
