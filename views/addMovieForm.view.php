@@ -15,6 +15,7 @@
         color: red;
     }
 </style>
+
 <?php session_start(); ?>
 
 <?php if(isset($_SESSION['flash_message'])): ?>
@@ -57,7 +58,7 @@
             </div>
         <?php endforeach ?>
     </div>
-
+  
     <label for="screen_shots">Screen Shots:</label>
     <input type="file" name="screen_shots[]" multiple></input>
 

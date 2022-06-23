@@ -9,5 +9,5 @@
     require 'database/fetchGenres.php'; 
     $listOfGenres = fetchGenres($conn);
 
-
+    
     require 'views/addMovieForm.view.php'; 

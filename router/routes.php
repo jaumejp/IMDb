@@ -15,7 +15,7 @@
 
     $router->get('', 'controller/homeController.php');
 
-    $router->get('api/movies', 'controller/showJsonMovies.php');
+    $router->get('api/movies', 'controller/validateFilterMoviesController.php');
 
     $router->get('notFound', 'views/notFound.view.php');
 
@@ -30,5 +30,8 @@
     $router->get('movie', 'views/movie.view.php');
 
     $router->get('movie/delete', 'controller/deleteMovieController.php');
+    
 
     $router->get('movies/search', 'controller/searchMovieController.php');
+
+    $router->post('movies/search', 'controller/validateFilterMoviesController.php');

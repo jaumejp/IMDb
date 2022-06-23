@@ -116,4 +116,46 @@
         return $imgUploadPath;
 
     }
+
+
+
+
+    // Functions for searcher form
+    function ratingOnRange($rating) {
+
+        switch($rating) {
+            case "low-score":
+                return true;
+                break;
+
+            case "medium-score":
+                return true;
+                break;
+
+            case "high-score":
+                return true;
+                break;
+                
+            default: 
+                return false;
+        }
+
+    }
+
+    function parseRating($rating) {
+        switch($rating) {
+            case "low-score":
+                return " < 3";
+                break;
+
+            case "medium-score":
+                return " > 3 and < 5 ";
+                break;
+
+            case "high-score":
+                return " > 8 ";
+                break;
+                
+        }
+    }
     

@@ -23,7 +23,7 @@
     <p> <?= $message ?> </p>
 <?php endif ?>
 
-<form method="get" enctype='multipart/form-data' action="/api/movies">
+<form method="post" enctype='multipart/form-data' action="/movies/search">
 
     <label for="">Movie Title or information:</label>
     <input name="title"></input>
@@ -43,6 +43,16 @@
         <option value="<?= $director ?>"> <?= $director ?> </option>
         <?php endforeach ?>
     </select>
+
+    <label for="">Genres:</label>
+    <div class="genres-container"> 
+        <?php foreach($listOfGenres as $genre) : ?>
+            <div>
+                <label for=""><?= $genre ?></label>
+                <input type="checkbox" value="<?= $genre ?>" name="tags[]"></input>
+            </div>
+        <?php endforeach ?>
+    </div>
 
     <button type="submit">Submit</button>
 
