@@ -1,23 +1,21 @@
 <?php 
 
-function fetchDirectors() {
+    function fetchDirectors($conn) {
 
-    require 'database/dataBaseConnection.php';
+        // List of directors: 
+        $statement = $conn->prepare("SELECT * FROM directors"); 
+        $statement->execute(); 
 
-    // List of directors: 
-    $statement = $conn->prepare("SELECT * FROM directors"); 
-    $statement->execute(); 
+        // Generate list of directors:
+        $listOfDirectors = array();
 
-    // Generate list of directors:
-    $listOfDirectors = array();
+        $directors = $statement->fetchAll();
 
-    $directors = $statement->fetchAll();
+        // while ($movie = $statement->fetch()) {
+        foreach ($directors as $director) { 
+            $listOfDirectors[] = $director["name"];
+        }
 
-    // while ($movie = $statement->fetch()) {
-    foreach ($directors as $director) { 
-        $listOfDirectors[] = $director["name"];
+        return $listOfDirectors;
     }
-
-    return $listOfDirectors;
-}
 

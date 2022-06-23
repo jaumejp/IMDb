@@ -11,7 +11,7 @@
 
     //     ]; 
 
-    // $router->define($routes);
+    // $router->define($routes);  
 
     $router->get('', 'controller/homeController.php');
 
@@ -19,9 +19,9 @@
 
     $router->get('notFound', 'views/notFound.view.php');
 
-    $router->get('movies/create', 'views/addMovieForm.view.php');
+    $router->get('movies/create', 'controller/addMovieController.php');
 
-    $router->post('api/movies', 'controller/addMovieController.php'); 
+    $router->post('api/movies', 'controller/validateMovieController.php'); 
 
     $router->get('importData', 'controller/importData.php');
 
@@ -31,4 +31,4 @@
 
     $router->get('movie/delete', 'controller/deleteMovieController.php');
 
-    $router->get('movies/search', 'views/searchMovieForm.php');
+    $router->get('movies/search', 'controller/searchMovieController.php');

@@ -1,7 +1,9 @@
 <?php
 
-    require 'database/fetchMovies.php'; 
+    require 'database/dataBaseConnection.php';
+    $conn = createConectionToDB();
 
-    $listOfMovies = fetchMovies();
+    require 'database/fetchMovies.php'; 
+    $listOfMovies = fetchMovies($conn);
     
     require 'views/home.view.php';
