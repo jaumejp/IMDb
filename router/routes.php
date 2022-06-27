@@ -34,4 +34,4 @@
 
     $router->get('movies/search', 'controller/searchMovieController.php');
 
-    $router->post('movies/search', 'controller/validateFilterMoviesController.php');
+    $router->post('movies/search', 'controller/validateFilterController.php');

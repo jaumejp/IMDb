@@ -145,15 +145,15 @@
     function parseRating($rating) {
         switch($rating) {
             case "low-score":
-                return " < 3";
+                return " rating < 3";
                 break;
 
             case "medium-score":
-                return " > 3 and < 5 ";
+                return " ( rating > 3 and rating < 5 ) ";
                 break;
 
             case "high-score":
-                return " > 8 ";
+                return " rating > 8 ";
                 break;
                 
         }

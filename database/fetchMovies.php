@@ -4,9 +4,6 @@
      * These function fetch the imdb database and return an array of movies.
      */
     function fetchMovies($conn) {
-        require 'models/Movie.php';
-        require 'models/Director.php';
-
         // Import Movies Table:
         // Get movies data from BBDD:
         $statement = $conn->prepare("SELECT * FROM movies"); 
@@ -20,6 +17,19 @@
         //var_dump($movies); die();
 
         // fetch movie by movie:
+
+        return parseListOfMovies($movies, $conn);
+ 
+        
+    }
+
+
+    /**
+     * These function recives the database registers and return an array of objects of the class Movie.
+     */
+    function parseListOfMovies($movies, $conn) {
+        require 'models/Movie.php';
+        require 'models/Director.php';
 
         // while ($movie = $statement->fetch()) {
         foreach ($movies as $movie) {
