@@ -1,0 +1,22 @@
+.genres ul {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+.genres ul li {
+    list-style: none;
+    border: 1px solid #aaa;
+    padding: 3px 9px;
+    font-size: smaller;
+    border-radius: 15px;
+    color: #aaa;
+}
+
+
+/* Mobile styles */
+@media (max-width: 1270px) { 
+    .genres ul {
+        justify-content: center;
+        align-items: center;
+    }
+    }
