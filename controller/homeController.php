@@ -5,5 +5,11 @@
 
     require 'database/fetchMovies.php'; 
     $listOfMovies = fetchMovies($conn);
+
+    require 'database/fetchDirectors.php'; 
+    $listOfDirectors = fetchDirectors($conn);
+
+    require 'database/fetchGenres.php'; 
+    $listOfGenres = fetchGenres($conn);
     
     require 'views/home.view.php';

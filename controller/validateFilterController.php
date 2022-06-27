@@ -21,7 +21,7 @@
     if ($error = invalidInputs($listOfDirectors, $listOfGenres)) {
         // return to form and show error message
         $_SESSION['flash_message'] = $error;
-        header("Location: /movies/search");
+        header("Location: /");
         die();
 
     } else {
@@ -39,7 +39,9 @@
             var_dump("no movies founded");
         } else {
             $listOfMovies = parseListOfMovies($movies, $conn);
-            echo parseToJson($listOfMovies);
+
+            $listOfMovies = parseToJson($listOfMovies);
+            header("Location: /");
         }
         die();
     

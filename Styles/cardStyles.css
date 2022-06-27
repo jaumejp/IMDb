@@ -268,3 +268,8 @@ section.create-movie {
         justify-content: center;
     } */
 }
+
+.genres-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}

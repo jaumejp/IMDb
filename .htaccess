@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
-    RewriteCond %{REQUEST_URI}  !(\.png|\.jpg|\.jpeg|\.webp)$
+    RewriteCond %{REQUEST_URI}  !(\.png|\.jpg|\.jpeg|\.webp|\.css|\.js)$
     RewriteRule ^.*$ index.php [END]
 </IfModule>

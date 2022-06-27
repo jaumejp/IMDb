@@ -28,8 +28,8 @@
      * These function recives the database registers and return an array of objects of the class Movie.
      */
     function parseListOfMovies($movies, $conn) {
-        require 'models/Movie.php';
-        require 'models/Director.php';
+        require_once 'models/Movie.php';
+        require_once 'models/Director.php';
 
         // while ($movie = $statement->fetch()) {
         foreach ($movies as $movie) {
