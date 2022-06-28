@@ -27,15 +27,8 @@
     <!--Content of the website-->
     <main>
         <section>  
-            <?php session_start(); ?>
-            <!-- Message for search input invalid -->
-            <?php if(isset($_SESSION['flash_message'])): ?>
-                <?php $message = $_SESSION['flash_message']; ?>
-                <?php unset($_SESSION['flash_message']); ?>
-                <p class="error-message"> <?= $message ?> </p>
-            <?php endif ?>
-
-            <form class="searcher-card" method="post" enctype='multipart/form-data' action="/movies/search">
+            
+            <form class="searcher-card" method="post" enctype='multipart/form-data'>
                 <div class="main">
                     <img 
                         src="https://picsum.photos/400/400"
@@ -55,9 +48,9 @@
                 <!-- Rating Filter -->
                 <div>
                     <label for="">Rating:</label>
-                    &lt3<input type="checkbox" name="rating[]" id="low-score">
-                    3-5<input type="checkbox" name="rating[]" id="medium-score">
-                    &gt8<input type="checkbox" name="rating[]" id="high-score">
+                    &lt3<input type="checkbox" name="rating[]" value="low-score">
+                    3-5<input type="checkbox" name="rating[]" value="medium-score">
+                    &gt8<input type="checkbox" name="rating[]" value="high-score">
                 </div>
 
                 <!-- Genres Filter -->
@@ -77,6 +70,16 @@
                 </div>
             </form>
         </section>
+
+        <section>
+            <!-- Message for search input invalid or not founded -->
+            <?php if(isset($_SESSION['flash_message'])): ?>
+                <?php $message = $_SESSION['flash_message']; ?>
+                <?php unset($_SESSION['flash_message']); ?>
+                <p class="error-message"> <?= $message ?> </p>
+            <?php endif ?>
+        </section>
+
 
         <!--List of movies-->
         <section>   

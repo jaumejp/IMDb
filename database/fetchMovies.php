@@ -4,6 +4,7 @@
      * These function fetch the imdb database and return an array of movies.
      */
     function fetchMovies($conn) {
+
         // Import Movies Table:
         // Get movies data from BBDD:
         $statement = $conn->prepare("SELECT * FROM movies"); 

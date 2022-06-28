@@ -14,8 +14,10 @@
     // $router->define($routes);  
 
     $router->get('', 'controller/homeController.php');
+    $router->post('', 'controller/homeController.php');
 
     $router->get('api/movies', 'controller/validateFilterMoviesController.php');
+    // movies/formIndex.php
 
     $router->get('notFound', 'views/notFound.view.php');
 

@@ -1,13 +1,11 @@
 
 <?php   
 
-    session_start();
+    //session_start();
 
     require 'helpers/formValidationFunctions.php';
     require 'helpers/parseMovieToJson.php';
 
-    require 'database/dataBaseConnection.php';
-    $conn = createConectionToDB();
 
     require 'database/fetchDirectors.php'; 
     $listOfDirectors = fetchDirectors($conn);
@@ -15,7 +13,7 @@
     require 'database/fetchGenres.php'; 
     $listOfGenres = fetchGenres($conn);
 
-    require 'database/fetchMovies.php';
+    //require 'database/fetchMovies.php';
 
     // Get and validate data from URL
     if ($error = invalidInputs($listOfDirectors, $listOfGenres)) {
@@ -36,16 +34,24 @@
         $movies = $statement->fetchAll();
 
         if (count($movies) == 0 ) {
-            var_dump("no movies founded");
+            //var_dump("no movies founded");
         } else {
             $listOfMovies = parseListOfMovies($movies, $conn);
+            //return $listOfMovies;
+            //$listOfMovies = parseToJson($listOfMovies);
 
-            $listOfMovies = parseToJson($listOfMovies);
-            header("Location: /");
+            //echo $listOfMovies;
+            //header("Location: /");
         }
-        die();
-    
+
+        //return $listOfMovies;
+
     }
+    
+
+
+    
+
 
     function getData() {
         $title = $_POST['title'];
@@ -95,6 +101,21 @@
         
         $query;
         $firstCondition = true;
+
+        /*
+        $conditionals = [];
+
+        $conditionals[] = $query;
+
+        if (! $conditionals) {
+            $query = "SELECT * FROM movies";
+        } else {
+            $query = "SELECT * FROM movies WHERE ";
+            $query .= implode(' AND ', $conditionals);
+        }
+        */
+
+
 
         if (empty($data["title"]) && empty($data["directorName"]) && empty($data["rating"]) && empty($data["genres"])) {
             $query = "SELECT * FROM movies";

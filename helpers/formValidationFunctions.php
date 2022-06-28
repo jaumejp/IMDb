@@ -27,10 +27,7 @@
 
     // Validate director's name:    
     function directorNameOK($directorsName, $listOfDirectors) {
-        if (in_array($directorsName, $listOfDirectors)) {
-            return true;
-        }
-        return false;
+        return in_array($directorsName, $listOfDirectors);
     }
 
     // Validate the tags: 
