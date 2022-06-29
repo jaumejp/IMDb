@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="./Styles/genresStyles.css"> 
 </head>
 <body>
-
     <!--Header-->
     <header>
         <h1>iMDb<span class="dot">.</span>io</h1>
@@ -23,50 +22,52 @@
             </ul>
         </nav>
     </header>
-
+    
     <!--Content of the website-->
     <main>
         <section>  
-            
+            <h2>Filter movie:</h2>
             <form class="searcher-card" method="post" enctype='multipart/form-data'>
-                <div class="main">
-                    <img 
-                        src="https://picsum.photos/400/400"
-                        alt="movie-title"
-                    />
-                </div>
 
                 <!-- Director's  Filter -->
-                <input name="title" type="text" placeholder="Movie name">
-                <select name="director-name" id="movie-directors">
-                    <option selected value="">None</option>
-                    <?php foreach($listOfDirectors as $director) : ?>
-                    <option value="<?= $director ?>"> <?= $director ?> </option>
-                    <?php endforeach ?>
-                </select>
+                <div>
+                    <label for="">Movie name or description:</label>
+                    <input name="title" type="text" placeholder="some information.." value="<?= $selectedFilters["title"] ?>">
+                </div>
+
+                <div>
+                    <label for="">Director's Name:</label>
+                    <select name="director-name" id="movie-directors">
+                        <option selected value="">None</option>
+                        <?php foreach($listOfDirectors as $director) : ?>
+                        <option value="<?= $director ?>" <?= ($director == $selectedFilters["director"]) ? "selected" : ''; ?> > <?= $director ?> </option>
+                        <?php endforeach ?>
+                    </select> 
+                </div>
+
 
                 <!-- Rating Filter -->
                 <div>
                     <label for="">Rating:</label>
-                    &lt3<input type="checkbox" name="rating[]" value="low-score">
-                    3-5<input type="checkbox" name="rating[]" value="medium-score">
-                    &gt8<input type="checkbox" name="rating[]" value="high-score">
+                    &lt3<input type="checkbox" name="rating[]" value="low-score" <?= (in_array("low-score", $selectedFilters["ratings"])) ? "checked" : ''; ?> >
+                    3-5<input type="checkbox" name="rating[]" value="medium-score" <?= (in_array("medium-score", $selectedFilters["ratings"])) ? "checked" : ''; ?> >
+                    &gt8<input type="checkbox" name="rating[]" value="high-score" <?= (in_array("high-score", $selectedFilters["ratings"])) ? "checked" : ''; ?> >
                 </div>
 
-                <!-- Genres Filter -->
-                <label for="">Genres:</label>
+                <!-- Genres Filter --> 
                 <div class="genres-container"> 
-                    <?php foreach($listOfGenres as $genre) : ?>
-                        <div>
-                            <label for=""><?= $genre ?></label>
-                            <input type="checkbox" value="<?= $genre ?>" name="tags[]"></input>
-                        </div>
-                    <?php endforeach ?>
+                    <label for="">Genres:</label>
+                    <div class="generes">
+                        <?php foreach($listOfGenres as $genre) : ?>
+                                <label for=""><?= $genre ?></label>
+                                <input type="checkbox" value="<?= $genre ?>" name="tags[]" <?= (in_array($genre, $selectedFilters["genres"])) ? "checked" : ''; ?> ></input>
+                        <?php endforeach ?>
+                    </div>
                 </div>
 
                 <div>
-                    <button class="btn" >Search</button>
-                    <button class="btn">Add Movie</button>
+                    <button type="submit" class="btn" >Search</button>
+                    <button type="button" class="btn">Add Movie</button>
                 </div>
             </form>
         </section>
@@ -95,8 +96,9 @@
                             <p class="title"> <?= $movie->getTitle() ?> </p>
                             <div class="genres">
                                 <ul>
-                                    <li>Horror</li>
-                                    <li>Adventure</li>
+                                    <?php foreach($movie->getGenres() as $genre): ?>
+                                        <li><?= $genre ?></li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </div>
                             <p class="rating"><?= $movie->getRating() ?></p>
@@ -106,7 +108,7 @@
                         <p><?= $movie->getDescription() ?></p>
                         <div>
                             <button class="btn">Delete</button>
-                            <button class="btn"><a href="">Edit</a></button>
+                            <button class="btn"><a href="./movies/edit?id=<?= $movie->getId() ?>">Edit</a></button>
                             <button class="btn"><a href="./movie.html">More info</a></button>
                         </div>
                     </div>

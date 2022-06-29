@@ -14,9 +14,7 @@ section {
     gap: 20px;
 }
 
-.movie-card, 
-.searcher-card,
-.add-movie {
+.movie-card {
     background-color: #fff;
     border-radius: 15px;
     padding: 20px;
@@ -25,14 +23,27 @@ section {
     gap: 20px;
     align-items: center;
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24) ;
+    width: 100%;
 }
 .searcher-card {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24) ;
+    width: 100%;
     display: flex;
+    flex-direction: column;
     margin: 0;
     gap: 1em;
-    width: 100%;
-
 }
+
+.generes {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 0.1fr 0.5fr);
+    gap: 0.2em;
+}
+
 
 .main img {
     width: 100px;
@@ -269,7 +280,3 @@ section.create-movie {
     } */
 }
 
-.genres-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-}
