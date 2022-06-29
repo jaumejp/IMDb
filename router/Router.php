@@ -4,7 +4,7 @@
         { 
             public $routes = [
                 'GET' => [],
-                'POS' => []
+                'POST' => []
             ];
 
             public static function load($file) {

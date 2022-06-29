@@ -14,8 +14,6 @@
     $listOfDirectors = fetchDirectors($conn);
     $listOfGenres = fetchGenres($conn);
 
-    // get data:
-
     // Create validator object:
     $validator = new FilterValidator($listOfDirectors, $listOfGenres);
 
@@ -36,7 +34,14 @@
     $statement = $conn->prepare($query); 
     $statement->execute();  
     $movies = $statement->fetchAll();
-    $listOfMovies;
+
+    $selectedFilters = [
+        'title' => $_POST["title"] ?? '',
+        'director' => $_POST["director-name"] ?? '',
+        'ratings' => $_POST["rating"] ?? array(),
+        'genres' => $_POST["tags"] ?? array(),
+    ];
+
     if (count($movies) == 0 ) {
         $_SESSION['flash_message'] = "No movies founded!";
         $listOfMovies = [];

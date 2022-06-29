@@ -16,7 +16,6 @@
     }
 </style>
 
-<?php session_start(); ?>
 
 <?php if(isset($_SESSION['flash_message'])): ?>
     <?php $message = $_SESSION['flash_message']; ?>
@@ -24,7 +23,7 @@
     <p> <?= $message ?> </p>
 <?php endif ?>
 
-<form method="post" enctype='multipart/form-data' action="/api/movies">
+<form method="post" enctype='multipart/form-data' action="">
 
     <label for="">Movie title</label>
     <input name="title"></input>

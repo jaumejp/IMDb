@@ -29,6 +29,10 @@
             return $this->title;
         }
 
+        public function getId() {
+            return $this->id;
+        }
+
         public function getRating() {
             return $this->rating;
         }

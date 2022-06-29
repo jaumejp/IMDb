@@ -1,65 +1,65 @@
 <?php
     
     // Check if all inputs are filled:
-    function allInputsFilled($title, $resume, $description) {
-        if 
-        (
-            empty($title) || 
-            empty($resume) || 
-            empty($description)
-        ) {
-            return false;
-        }
+    // function allInputsFilled($title, $resume, $description) {
+    //     if 
+    //     (
+    //         empty($title) || 
+    //         empty($resume) || 
+    //         empty($description)
+    //     ) {
+    //         return false;
+    //     }
 
-        return true;
+    //     return true;
         
-    }
+    // }
 
     // Check if the rating is between 0 and 10: 
-    function ratingOK($rating) {
-        if (empty($rating)) {
-            return false;
-        } else if ($rating < 0 || $rating > 10) {
-            return false;
-        }
-        return true;
-    }
+    // function ratingOK($rating) {
+    //     if (empty($rating)) {
+    //         return false;
+    //     } else if ($rating < 0 || $rating > 10) {
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
     // Validate director's name:    
-    function directorNameOK($directorsName, $listOfDirectors) {
-        return in_array($directorsName, $listOfDirectors);
-    }
+    // function directorNameOK($directorsName, $listOfDirectors) {
+    //     return in_array($directorsName, $listOfDirectors);
+    // }
 
-    // Validate the tags: 
-    function tagsOK($tags, $listOfGenres) {
-        foreach($tags as $tag) {
-            if (!in_array($tag, $listOfGenres)) {
-                return false;
-            }
-        }
-        return true;
-    }
+    // // Validate the tags: 
+    // function tagsOK($tags, $listOfGenres) {
+    //     foreach($tags as $tag) {
+    //         if (!in_array($tag, $listOfGenres)) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
 
     // Validate image: 
-    function imageOK($image) {
-        // Check if the image exists:
-        if (empty($image["size"])) {
-            return false; 
-        }
-        // Check if the image has one allowed extension: 
-        $file_name = $image["name"];
-        $temp= explode('.',$file_name);
-        $extension = end($temp);
-        // allowed file type: 
-        $allowed_exs = array("jpg", "jpeg", "png");
-        if (in_array($extension, $allowed_exs)) {
-            return true;
-        }
+    // function imageOK($image) {
+    //     // Check if the image exists:
+    //     if (empty($image["size"])) {
+    //         return false; 
+    //     }
+    //     // Check if the image has one allowed extension: 
+    //     $file_name = $image["name"];
+    //     $temp= explode('.',$file_name);
+    //     $extension = end($temp);
+    //     // allowed file type: 
+    //     $allowed_exs = array("jpg", "jpeg", "png");
+    //     if (in_array($extension, $allowed_exs)) {
+    //         return true;
+    //     }
     
-        // The uploaded file is not empty but has a invalid extension:
-        return false;  
+    //     // The uploaded file is not empty but has a invalid extension:
+    //     return false;  
 
-    }
+    // }
 
     function getLocalImagePath($image, $directory) {
 
@@ -80,26 +80,26 @@
         
     }
 
-    function screenShotsOK($screenShots) {
+    // function screenShotsOK($screenShots) {
 
-        // Check if the image exists:
-        if (empty($screenShots["size"])) {
-            return false; 
-        }
-        // Check if the image has one allowed extension:
-        foreach($screenShots["name"] as $screenShotName) {             
-            $file_name = $screenShotName;
-            $temp= explode('.',$file_name);
-            $extension = end($temp);
-            // allowed file type: 
-            $allowed_exs = array("jpg", "jpeg", "png");
-            if (!in_array($extension, $allowed_exs)) {
-                return false;
-            }
-        }
+    //     // Check if the image exists:
+    //     if (empty($screenShots["size"])) {
+    //         return false; 
+    //     }
+    //     // Check if the image has one allowed extension:
+    //     foreach($screenShots["name"] as $screenShotName) {             
+    //         $file_name = $screenShotName;
+    //         $temp= explode('.',$file_name);
+    //         $extension = end($temp);
+    //         // allowed file type: 
+    //         $allowed_exs = array("jpg", "jpeg", "png");
+    //         if (!in_array($extension, $allowed_exs)) {
+    //             return false;
+    //         }
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 
     function getLocalScreenShotPath($screenShotName, $tempUrl) {
         $file_name = $screenShotName;

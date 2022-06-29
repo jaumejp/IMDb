@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
     session_start();
    
@@ -16,13 +16,15 @@
     require 'database/fetchGenres.php'; 
     $listOfGenres = fetchGenres($conn);
 
-
+    require 'Support/FormValidator.php';
+    $validator = new FormValidator($listOfDirectors, $listOfGenres);
     
-    if ($error = invalidInputs($listOfDirectors, $listOfGenres)) {
+    if (! $validator->validate()) {
         // Incorrect inputs:
+        $error = $validator->message;
         $_SESSION['flash_message'] = $error;
         header("Location: /movies/create");
-        die();
+        exit;
 
     } else {
         // Inputs correct, add movie to BBDD:
@@ -31,32 +33,31 @@
         die();
     }
 
-
-    function invalidInputs($listOfDirectors, $listOfGenres) {
-        if (!allInputsFilled($_POST["title"], $_POST["resume"], $_POST["description"])) {
-            return "Please fill all the fields";
+    // function invalidInputs($listOfDirectors, $listOfGenres) {
+    //     if (!allInputsFilled($_POST["title"], $_POST["resume"], $_POST["description"])) {
+    //         return "Please fill all the fields";
     
-        } else if (!ratingOK($_POST["rating"])) {
-            return "Rating must be between 0 and 10";
+    //     } else if (!ratingOK($_POST["rating"])) {
+    //         return "Rating must be between 0 and 10";
     
-        } else if (!imageOK($_FILES["cover-image"])) {
-            return "Upload a valid cover image";
+    //     } else if (!imageOK($_FILES["cover-image"])) {
+    //         return "Upload a valid cover image";
     
-        } else if(!directorNameOK($_POST["director-name"], $listOfDirectors)) {
-            return "Enter a valid director's name";
+    //     } else if(!directorNameOK($_POST["director-name"], $listOfDirectors)) {
+    //         return "Enter a valid director's name";
     
-        } else if(!isset($_POST["tags"])) {
-            return "Enter at least one tag";
+    //     } else if(!isset($_POST["tags"])) {
+    //         return "Enter at least one tag";
     
-        } else if (!tagsOK($_POST["tags"], $listOfGenres)) {
-            return "Enter a valid genres";
+    //     } else if (!tagsOK($_POST["tags"], $listOfGenres)) {
+    //         return "Enter a valid genres";
     
-        } else if (!screenShotsOK($_FILES["screen_shots"])) {
-            return "Upload valid screen shots";
-        } else {
-            return false;
-        }
-    }
+    //     } else if (!screenShotsOK($_FILES["screen_shots"])) {
+    //         return "Upload valid screen shots";
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     function addMovieToDatabase($conn) {
 
@@ -116,4 +117,4 @@
     }
 
 
-
+ -->

@@ -22,6 +22,10 @@
     $router->get('notFound', 'views/notFound.view.php');
 
     $router->get('movies/create', 'controller/addMovieController.php');
+    
+    $router->post('movies/create', 'controller/addMovieController.php');
+
+    $router->get('movies/edit', 'controller/editMovieController.php');
 
     $router->post('api/movies', 'controller/validateMovieController.php'); 
 

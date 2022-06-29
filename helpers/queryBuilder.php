@@ -63,6 +63,7 @@ function createQueryFor($data) {
         $query = "SELECT * FROM movies WHERE ";
         $query .= implode(' AND ', $conditionals);
     }
+    // Fer un array on primer l'emplanem a través de tots els ifs, posem totes les condicions i al final explotem l'array amb and pel mig
     */
 
 

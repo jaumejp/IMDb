@@ -15,6 +15,7 @@
         color: red;
     }
 </style>
+
 <?php session_start(); ?>
 
 <?php if(isset($_SESSION['flash_message'])): ?>
@@ -23,22 +24,26 @@
     <p> <?= $message ?> </p>
 <?php endif ?>
 
-<form method="post" enctype='multipart/form-data' action="/movies/search">
+<form method="post" enctype='multipart/form-data' action="/api/movies">
 
-    <label for="">Movie Title or information:</label>
+    <label for="">Movie title</label>
     <input name="title"></input>
 
-    <label for="">Rating:</label>
-    <div class="rating">
-        &lt3<input type="checkbox" name="rating[]" value="low-score">
-        3-5<input type="checkbox" name="rating[]" value="medium-score">
-        &gt8<input type="checkbox" name="rating[]" value="high-score">
-    </div>
+    <label for="">Resume</label>
+    <textarea name="resume" rows="4" cols="50"></textarea>
 
+    <label for="">Description</label>
+    <textarea name="description" rows="4" cols="50"></textarea>
+
+    <label for="">Rating</label>
+    <input type="number" min="0" max="10" step="0.1" name="rating"></input>
+
+    <label for="">Cover Image</label>
+    <input type="file" name="cover-image"></input>
 
     <label for="">Director's name</label>
     <select name="director-name">
-        <option selected value="">None</option>
+        <option selected value="" disabled>Select director's movie</option>
         <?php foreach($listOfDirectors as $director) : ?>
         <option value="<?= $director ?>"> <?= $director ?> </option>
         <?php endforeach ?>
@@ -53,6 +58,9 @@
             </div>
         <?php endforeach ?>
     </div>
+  
+    <label for="screen_shots">Screen Shots:</label>
+    <input type="file" name="screen_shots[]" multiple></input>
 
     <button type="submit">Submit</button>
 
