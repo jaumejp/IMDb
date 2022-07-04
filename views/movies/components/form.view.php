@@ -27,16 +27,17 @@
 <form method="post" enctype='multipart/form-data' action="<?php echo $endpoint ?>">
 
     <label for="">Movie title</label>
-    <input name="title" value="<?= $showInfo ?? '' ? $movie["title"] : '' ?>"></input>
+    <input name="title" value="<?= $showInfo ?? '' ? $movie[0]->getTitle() : ''?>"></input>
 
     <label for="">Resume</label>
-    <textarea name="resume" rows="4" cols="50"><?= $showInfo ?? '' ? $movie["summary"] : '' ?></textarea>
+    <textarea name="resume" rows="4" cols="50"><?= $showInfo ?? '' ? $movie[0]->getSummary() : '' ?></textarea>
 
     <label for="">Description</label>
-    <textarea name="description" rows="4" cols="50"><?= $showInfo ?? '' ? $movie["description"] : '' ?></textarea>
+    <textarea name="description" rows="4" cols="50"><?= $showInfo ?? '' ? $movie[0]->getDescription() : '' ?></textarea>
 
     <label for="">Rating</label>
-    <input type="number" min="0" max="10" step="0.1" name="rating" value = " <?= $showInfo ?? '' ? '7' : '' ?> " ></input>
+    <input type="range" min="0" max="10" step="0.1" name="rating" value = " <?= $showInfo ? $movie[0]->getRating() : '0' ?> " ></input>
+    <output><?= $showInfo ?? '' ? $movie[0]->getRating() : '0' ?></output>
 
     <label for="">Cover Image</label>
     <input type="file" name="cover-image">
@@ -45,7 +46,20 @@
     <select name="director-name">
         <option selected value="" disabled>Select director's movie</option>
         <?php foreach($listOfDirectors as $director) : ?>
-        <option value="<?= $director ?>"> <?= $director ?> </option>
+
+            <option 
+                value = "<?= $director ?>"  
+                <?php if (isset($showInfo)): ?> 
+                    <?php if($movie[0]->getDirector->getName): ?>
+                        <?= 'selected' ?>
+                    <?php endif ?> 
+                <?php endif ?> 
+            > 
+            
+                <?= $director ?> 
+            
+            </option>
+
         <?php endforeach ?>
     </select>
 
@@ -59,6 +73,15 @@
         <?php endforeach ?>
     </div>
   
+    <label for="screen_shots">Screen Shots:</label>
+    <input type="file" name="screen_shots[]" multiple></input>
+
+    <label for="screen_shots">Screen Shots:</label>
+    <input type="file" name="screen_shots[]" multiple></input>
+
+    <label for="screen_shots">Screen Shots:</label>
+    <input type="file" name="screen_shots[]" multiple></input>
+
     <label for="screen_shots">Screen Shots:</label>
     <input type="file" name="screen_shots[]" multiple></input>
 

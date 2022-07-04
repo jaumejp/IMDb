@@ -2,6 +2,7 @@
    session_start();
    require 'database/dataBaseConnection.php';
    require 'Support/MovieRepository.php'; 
+   require 'Support/MovieService.php'; 
    require 'database/fetchDirectors.php'; 
    require 'database/fetchGenres.php'; 
 
@@ -11,7 +12,9 @@
    $listOfGenres = fetchGenres($conn);
 
    // Get info from the id given by the url:
-   $movie = (new MovieRepository($conn))->getMovieFromDirectorId($_GET["id"]);
+   $fetchMovie = (new MovieRepository($conn))->getMovieFromDirectorId($_GET["id"]);
+
+   $movie = (new MovieService($conn))->parseListOfMovies($fetchMovie);
 
    // Show the form with data on inputs:
    $endpoint = '/movies/update'; 

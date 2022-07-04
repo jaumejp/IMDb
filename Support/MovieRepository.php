@@ -143,11 +143,11 @@
 
         // Given an id of a movie, returns an array with the movie
         public function getMovieFromDirectorId($id) {
-            $query = "SELECT * from movies WHERE id = :movie_id LIMIT 1";
+            $query = "SELECT * from movies WHERE id = :movie_id";
             $statement = $this->conn->prepare($query);
             $statement->bindParam(":movie_id", $id);
             $statement->execute(); 
-            $movie = $statement->fetch(PDO::FETCH_ASSOC);
+            $movie = $statement->fetchAll();
             return $movie;
         }
 
