@@ -76,9 +76,9 @@
         function parseToJson($listOfMovies) {
 
             $jsonData = array();
-    
+
             foreach($listOfMovies as $movie) {
-                //var_dump($movie);
+                $movieId = $movie->getId();
                 $movieTitle = $movie->getTitle();
                 $movieSummary = $movie->getSummary();
                 $movieDescription = $movie->getDescription();
@@ -89,6 +89,7 @@
                 $movieGenres = $movie->getGenres();
     
                 $movieAux = array(
+                    'id' => $movieId,
                     'title' => $movieTitle, 
                     'resume' => $movieSummary,
                     'description' => $movieDescription,

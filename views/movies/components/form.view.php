@@ -76,14 +76,14 @@
     <label for="screen_shots">Screen Shots:</label>
     <input type="file" name="screen_shots[]" multiple></input>
 
-    <label for="screen_shots">Screen Shots:</label>
+    <!-- <label for="screen_shots">Screen Shots:</label>
     <input type="file" name="screen_shots[]" multiple></input>
 
     <label for="screen_shots">Screen Shots:</label>
     <input type="file" name="screen_shots[]" multiple></input>
 
     <label for="screen_shots">Screen Shots:</label>
-    <input type="file" name="screen_shots[]" multiple></input>
+    <input type="file" name="screen_shots[]" multiple></input> -->
 
     <button type="submit">Submit</button> 
 

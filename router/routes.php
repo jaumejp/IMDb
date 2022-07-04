@@ -29,7 +29,7 @@
 
     $router->get('movies/show', 'Controllers/Movies/ShowController.php');
 
-    $router->get('api/movies', 'Controllers/API/Movies/IndexController.php'); // TODO
+    $router->get('api/movies', 'Controllers/API/Movies/IndexController.php');
 
     //
 

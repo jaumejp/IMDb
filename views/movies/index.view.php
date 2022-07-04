@@ -39,7 +39,7 @@
                 <!-- Director's  Filter -->
                 <div>
                     <label for="">Movie name or description:</label>
-                    <input name="title" type="text" placeholder="some information.." value="<?= $selectedFilters["title"] ?>">
+                    <input id="movie-title" name="title" type="text" placeholder="some information.." value="<?= $selectedFilters["title"] ?>">
                 </div>
 
                 <div>
@@ -90,39 +90,34 @@
 
 
         <!--List of movies-->
-        <section>   
-            <?php foreach($listOfMovies as $movie) : ?>
-
+        <section id="movies-list">   
+            <template id="movie-card-template">
                 <article class="movie-card">
                     <div class="main">
                         <img 
-                            src="<?= $movie->getCoverImage() ?>"
-                            alt="<?= $movie->getTitle() ?>"
+                            src="--MovieImage--"
+                            alt="--MovieAlt--?>"
                         />
                         <div class="info">
-                            <p class="title"> <?= $movie->getTitle() ?> </p>
+                            <p class="title">--MovieTitle--</p>
                             <div class="genres">
-                                <ul>
-                                    <?php foreach($movie->getGenres() as $genre): ?>
-                                        <li><?= $genre ?></li>
-                                    <?php endforeach; ?>
+                                <ul class="genres-list">
+                                    <!-- Create all the <li>genre</li> by javaScript -->
                                 </ul>
                             </div>
-                            <p class="rating"><?= $movie->getRating() ?></p>
+                            <p class="rating">--MovieRating--</p>
                         </div>
                     </div>
                     <div class="description">
-                        <p><?= $movie->getDescription() ?></p>
-                        <div>
-                            <button class="btn"><a href="./movies/delete?id=<?= $movie->getId() ?>">Delete</a></button>
-                            <button class="btn"><a href="./movies/edit?id=<?= $movie->getId() ?>">Edit</a></button>
-                            <button class="btn"><a href="./movies/show?id=<?= $movie->getId() ?>">More info</a></button>
+                        <p>--MovieDescription--</p>
+                        <div class="buttons">
+                            <button class="btn delete"><a href="">Delete</a></button>
+                            <button class="btn edit"><a href="">Edit</a></button>
+                            <button class="btn more-info"><a href="">More info</a></button>
                         </div>
                     </div>
                 </article>
-
-            <?php endforeach ?>
-            
+            </template>            
         </section>
 
         <!-- Delete Pop up container -->
@@ -142,6 +137,100 @@
     <footer>
         <p>Some legat text here</p>
     </footer>
+
+    <script>
+        // async function fetchData(endPoint) {
+        //     const response = await fetch(endPoint)
+        //     const movies = await response.json()
+        //     //console.log(movies)
+        //     return movies
+        // }
+        // fetchData('http://imbd.test/api/movies').then(movies => {
+        //     // Create fragment:
+        //     const fragment = document.createDocumentFragment();
+
+        //     // Get referenct to template: 
+        //     const template = document.querySelector('#movie-card-template').content 
+
+        //     // Generate all the movie cards: 
+        //     for(const movie of movies) {
+        //         // Create clone of the <article> given by the template: 
+        //         const movieCard = template.cloneNode(true);
+                
+        //         // Modify data for these article:
+        //         movieCard.querySelector('img').src = movie.coverImage
+        //         movieCard.querySelector('img').alt = movie.title
+        //         movieCard.querySelector('.title').textContent = movie.title
+
+        //         // Grab reference to <ul>
+        //         const ul = movieCard.querySelector('.genres-list');
+
+        //         // For all the genres, create <li> tags
+        //         for (const genre of movie.genres) {
+        //             // Create tag:
+        //             const li = document.createElement("li");
+        //             // Change text of the tag: 
+        //             li.textContent = genre
+        //             // Add genre to <ul> genres-list
+        //             ul.appendChild(li)
+        //         }
+
+        //         movieCard.querySelector('.rating').textContent = movie.rating
+        //         movieCard.querySelector('.description p').textContent = movie.description
+
+        //         movieCard.querySelector('.buttons .delete a').href = `./movies/delete?id=${movie.id}`
+        //         movieCard.querySelector('.buttons .edit a').href = `./movies/edit?id=${movie.id}`
+        //         movieCard.querySelector('.buttons .more-info a').href = `./movies/show?id=${movie.id}`
+
+        //         // Add card to fragment:
+        //         fragment.appendChild(movieCard)
+        //     }
+
+        //     // Grab a reference to where we'll put the fragment ()
+        //     const moviesList = document.querySelector('#movies-list');
+
+        //     // Add the fragment to DOM:
+        //     moviesList.appendChild(fragment);
+
+        // })
+
+        document.querySelector('.searcher-card').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Get filtes from searcher card: 
+            movieTitle = document.querySelector('#movie-title').value
+            directorName = document.querySelector('#movie-directors').value
+
+            ratings = document.querySelectorAll("input[name='rating[]']")
+            for (const rating of ratings) {
+                if(rating.checked) {
+                    console.log("si")
+                }
+            }
+
+            genres = document.querySelectorAll("input[name='tags[]']")
+            for (const tag of genres) {
+                if(tag.checked) {
+                    console.log("si")
+                }
+            }
+
+            let endPoint = 'http://imbd.test/api/movies?id=5&title=tenet&genres[]=horror&genres[]=adventure'
+            
+            window.location.replace(endPoint)
+
+            // async function fetchData(endPoint) {
+            //     const response = await fetch(endPoint)
+            //     const movies = await response.json()
+            //     return movies
+            // }
+
+            // fetchData(endPoint).then(movies => {
+            //     console.log(movies)
+            // })
+
+        })
+        
+    </script>
     
 </body>
 </html>
