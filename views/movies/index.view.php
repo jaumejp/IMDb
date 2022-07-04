@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="./Styles/generalStyles.css">
     <link rel="stylesheet" href="./Styles/cardStyles.css">
     <link rel="stylesheet" href="./Styles/genresStyles.css"> 
+    <style>
+        /* Desde l'arxiu css no funciona */
+        .error-message span{
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <!--Header-->
     <header>
         <h1>iMDb<span class="dot">.</span>io</h1>
+
         <nav>
             <ul>
                 <li>Some</li>
@@ -22,11 +29,11 @@
             </ul>
         </nav>
     </header>
-    
+
     <!--Content of the website-->
     <main>
         <section>  
-            <h2>Filter movie:</h2>
+            <h2>Filter movies by:</h2>
             <form class="searcher-card" method="post" enctype='multipart/form-data'>
 
                 <!-- Director's  Filter -->
@@ -67,7 +74,7 @@
 
                 <div>
                     <button type="submit" class="btn" >Search</button>
-                    <button type="button" class="btn">Add Movie</button>
+                    <button type="button" class="btn"><a href="./movies/create">Add Movie</a></button>
                 </div>
             </form>
         </section>
@@ -107,9 +114,9 @@
                     <div class="description">
                         <p><?= $movie->getDescription() ?></p>
                         <div>
-                            <button class="btn">Delete</button>
+                            <button class="btn"><a href="./movies/delete?id=<?= $movie->getId() ?>">Delete</a></button>
                             <button class="btn"><a href="./movies/edit?id=<?= $movie->getId() ?>">Edit</a></button>
-                            <button class="btn"><a href="./movie.html">More info</a></button>
+                            <button class="btn"><a href="./movies/show?id=<?= $movie->getId() ?>">More info</a></button>
                         </div>
                     </div>
                 </article>

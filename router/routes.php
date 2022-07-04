@@ -11,33 +11,28 @@
 
     //     ]; 
 
-    // $router->define($routes);  
+    // $router->define($routes);   
 
-    $router->get('', 'controller/homeController.php');
-    $router->post('', 'controller/homeController.php');
+    $router->get('', 'Controllers/Movies/IndexController.php');
 
-    $router->get('api/movies', 'controller/validateFilterMoviesController.php');
-    // movies/formIndex.php
+    $router->post('', 'Controllers/Movies/IndexController.php');
+
+    $router->get('movies/create', 'Controllers/Movies/CreateController.php');
+
+    $router->post('movies/store', 'Controllers/Movies/StoreController.php');
+
+    $router->get('movies/edit', 'Controllers/Movies/EditController.php');
+
+    $router->post('movies/update', 'Controllers/Movies/UpdateController.php');
+
+    $router->get('movies/delete', 'Controllers/Movies/DeleteController.php');
+
+    $router->get('movies/show', 'Controllers/Movies/ShowController.php');
+
+    $router->get('api/movies', 'Controllers/API/Movies/IndexController.php'); // TODO
+
+    //
 
     $router->get('notFound', 'views/notFound.view.php');
 
-    $router->get('movies/create', 'controller/addMovieController.php');
-    
-    $router->post('movies/create', 'controller/addMovieController.php');
-
-    $router->get('movies/edit', 'controller/editMovieController.php');
-
-    $router->post('api/movies', 'controller/validateMovieController.php'); 
-
-    $router->get('importData', 'controller/importData.php');
-
     $router->get('loadDatabase', 'database/loadDatabaseFromJson.php');
-
-    $router->get('movie', 'views/movie.view.php');
-
-    $router->get('movie/delete', 'controller/deleteMovieController.php');
-    
-
-    $router->get('movies/search', 'controller/searchMovieController.php');
-
-    $router->post('movies/search', 'controller/validateFilterController.php');
