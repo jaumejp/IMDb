@@ -74,36 +74,38 @@
 
         // Given a list of objects movie, returns the corresponent JSON
         function parseToJson($listOfMovies) {
-
+            
             $jsonData = array();
-
-            foreach($listOfMovies as $movie) {
-                $movieId = $movie->getId();
-                $movieTitle = $movie->getTitle();
-                $movieSummary = $movie->getSummary();
-                $movieDescription = $movie->getDescription();
-                $movieRating = $movie->getRating();
-                $movieDirector = $movie->getDirector()->getName();
-                $movieCover = $movie->getCoverImage();
-                $movieScreenShots = $movie->getScreenShots();
-                $movieGenres = $movie->getGenres();
-    
-                $movieAux = array(
-                    'id' => $movieId,
-                    'title' => $movieTitle, 
-                    'resume' => $movieSummary,
-                    'description' => $movieDescription,
-                    'rating' => $movieRating,
-                    'director' => $movieDirector,
-                    'coverImage' => $movieCover,
-                    'movieScreenShots' => $movieScreenShots,
-                    'genres' => $movieGenres,
-                );
-                
-                $jsonData[] = $movieAux;
-                
+            
+            if (!empty($listOfMovies)) {
+                foreach($listOfMovies as $movie) {
+                    $movieId = $movie->getId();
+                    $movieTitle = $movie->getTitle();
+                    $movieSummary = $movie->getSummary();
+                    $movieDescription = $movie->getDescription();
+                    $movieRating = $movie->getRating();
+                    $movieDirector = $movie->getDirector()->getName();
+                    $movieCover = $movie->getCoverImage();
+                    $movieScreenShots = $movie->getScreenShots();
+                    $movieGenres = $movie->getGenres();
+        
+                    $movieAux = array(
+                        'id' => $movieId,
+                        'title' => $movieTitle, 
+                        'resume' => $movieSummary,
+                        'description' => $movieDescription,
+                        'rating' => $movieRating,
+                        'director' => $movieDirector,
+                        'coverImage' => $movieCover,
+                        'movieScreenShots' => $movieScreenShots,
+                        'genres' => $movieGenres,
+                    );
+                    
+                    $jsonData[] = $movieAux;
+                    
+                }
             }
-    
+
             return json_encode($jsonData);
         }
     

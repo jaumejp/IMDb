@@ -66,8 +66,8 @@
                     <label for="">Genres:</label>
                     <div class="generes">
                         <?php foreach($listOfGenres as $genre) : ?>
-                                <label for=""><?= $genre ?></label>
                                 <input type="checkbox" value="<?= $genre ?>" name="tags[]" <?= (in_array($genre, $selectedFilters["genres"])) ? "checked" : ''; ?> ></input>
+                                <label for=""><?= $genre ?></label>
                         <?php endforeach ?>
                     </div>
                 </div>
@@ -87,10 +87,12 @@
                 <p class="error-message"> <?= $message ?> </p>
             <?php endif ?>
         </section>
-
-
+        
+        
         <!--List of movies-->
         <section id="movies-list">   
+            <!-- Message error from javaScript -->
+            <h2 id="error-message"></h2>
             <template id="movie-card-template">
                 <article class="movie-card">
                     <div class="main">
@@ -140,18 +142,57 @@
 
     <script>
 
-        function createMovieCards(movies) {
+        function createEndPoint() {
+            // Get filtes from searcher card and add the info to end point: 
+            let endPoint = 'http://imbd.test/api/movies?'
+            
+            // Add title to endpoint
+            movieTitle = document.querySelector('#movie-title').value
+            endPoint += `title=${movieTitle}`
+
+            // Add director to endpoint
+            directorName = document.querySelector('#movie-directors').value
+            endPoint += `&director-name=${directorName}`
+
+            // Add ratings to endPoint
+            const ratingsList = document.querySelectorAll("input[name='rating[]']")
+            for (const rating of ratingsList) {
+                if(rating.checked) {
+                    endPoint += `&rating[]=${rating.value}`
+                }
+            }
+
+            // Add Genres to the endPoint
+            const genresList = document.querySelectorAll("input[name='tags[]']")
+            for (const tag of genresList) {
+                if(tag.checked) {
+                    endPoint += `&tags[]=${tag.value}`
+                }
+            } 
+
+            return endPoint
+        }
+
+        function createMovieCards(movies, moviesFounded=true) {
             // First reset all movies to add new ones: 
             moviesListContainer = document.querySelector('#movies-list')
             articles = moviesListContainer.querySelectorAll(".movie-card");
             for (const article of articles) {
                 moviesListContainer.removeChild(article)
             }
+            // Delete error message:
+            const notFoundMessage = document.querySelector('#error-message')
+            notFoundMessage.textContent = ''
 
-            // Create fragment:
+            if (!moviesFounded) {
+                notFoundMessage.textContent = 'No Movies Founded!' 
+                return;
+            } 
+        
+            // Create fragment to avoid reflow:
             const fragment = document.createDocumentFragment();
 
-            // Get referenct to template: 
+            // Get reference to template: 
             const template = document.querySelector('#movie-card-template').content 
 
             // Generate all the movie cards: 
@@ -188,58 +229,33 @@
                 fragment.appendChild(movieCard)
             }
 
-            // Grab a reference to where we'll put the fragment ()
+            // Grab a reference to where we'll put the fragment
             const moviesList = document.querySelector('#movies-list');
 
             // Add the fragment to DOM:
             moviesList.appendChild(fragment);
         }
 
-        function createEndPoint() {
-            // Get filtes from searcher card and add the info to end point: 
-            let endPoint = 'http://imdb.test/api/movies?'
-            
-            // Add title to endpoint
-            movieTitle = document.querySelector('#movie-title').value
-            endPoint += `title=${movieTitle}`
-
-            // Add director to endpoint
-            directorName = document.querySelector('#movie-directors').value
-            endPoint += `&director-name=${directorName}`
-
-            // Add ratings to endPoint
-            const ratingsList = document.querySelectorAll("input[name='rating[]']")
-            for (const rating of ratingsList) {
-                if(rating.checked) {
-                    endPoint += `&rating[]=${rating.value}`
-                }
-            }
-
-            // Add Genres to the endPoint
-            const genresList = document.querySelectorAll("input[name='tags[]']")
-            for (const tag of genresList) {
-                if(tag.checked) {
-                    endPoint += `&tags[]=${tag.value}`
-                }
-            } 
-
-            return endPoint
-        }
-
         async function createDOMwith(endPoint) {
             const response = await fetch(endPoint)
             const movies = await response.json()
-            createMovieCards(movies);
+
+            if (movies.length === 0) {
+                createMovieCards(movies, false);
+            } else {
+                createMovieCards(movies);
+            }
+            
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             createDOMwith('http://imbd.test/api/movies');
             
             document.querySelector('.searcher-card').addEventListener('submit', (e) => {
-                e.preventDefault();
+               e.preventDefault();
                 endPoint = createEndPoint()
-                createDOMwith(endPoint);
                 //window.location.replace(endPoint)
+                createDOMwith(endPoint);
             })
         })
 

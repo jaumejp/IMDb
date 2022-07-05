@@ -18,14 +18,16 @@
 
     $listOfMovies = [];
     if (count($movies) == 0 ) {
-        $_SESSION['flash_message'] = "No movies founded!";
-        echo("No movies founded");
-        exit();
+        // No movies founded for these query
+        //$_SESSION['flash_message'] = "No movies founded!";
+        $JSONmovies = (new MovieService($conn))->parseToJson($listOfMovies);
+        
     } else {
+        // Query founded
         $listOfMovies = (new MovieService($conn))->parseListOfMovies($movies);
+        $JSONmovies = (new MovieService($conn))->parseToJson($listOfMovies);
     }
     
-    $JSONmovies = (new MovieService($conn))->parseToJson($listOfMovies);
 
     echo($JSONmovies); 
 
@@ -93,47 +95,7 @@
             $query = "SELECT * FROM movies WHERE ";
             $query .= implode(' and ', $conditionals);
         }
-        return $query;
-
-        // if (empty($data["title"]) && empty($data["directorName"]) && empty($data["rating"]) && empty($data["genres"])) {
-        //     $query = "SELECT * FROM movies";
-        // } else {
-        //     $query = "SELECT * FROM movies WHERE";
-    
-        //     if (!empty($data["title"])) {
-        //         $query = $query . " (title like '%" . $data["title"] . "%' or description like '%" . $data["title"] . "%')";
-        //         $firstCondition = false;
-        //     } 
-            
-        //     if (!empty($data["directorName"])) {
-        //         if ($firstCondition) {
-        //             $query = $query . " director_id in (select id from directors where name = '" . $data["directorName"] . "')";
-        //             $firstCondition = false;
-        //         } else {
-        //             $query = $query . " and director_id in (select id from directors where name = '" . $data["directorName"] . "')";
-        //         }
-        //     }
-
-        //     if (!empty($data["rating"])) {
-        //         if ($firstCondition) {
-        //             $query = $query . " (" . $data["rating"] . ")";
-        //             $firstCondition = false;
-        //         } else {
-        //             $query = $query . " and (" . $data["rating"] . ")";
-        //         }
-        //     }
-    
-        //     if (!empty($data["genres"])) {
-        //         if ($firstCondition) {
-        //             $query = $query . " id in (select movie_id from genres_of_movies where genre_id in (select id from genres where " . $data["genres"] ."))";
-        //             $firstCondition = true;
-        //         } else {
-        //             $query = $query . " and id in (select movie_id from genres_of_movies where genre_id in (select id from genres where " . $data["genres"] ."))";
-        //         }
-    
-        //     }
-        // }
-    
+        return $query;   
         
     }
     // These two functions are helpers for getData()
