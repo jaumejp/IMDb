@@ -139,98 +139,111 @@
     </footer>
 
     <script>
-        // async function fetchData(endPoint) {
-        //     const response = await fetch(endPoint)
-        //     const movies = await response.json()
-        //     //console.log(movies)
-        //     return movies
-        // }
-        // fetchData('http://imbd.test/api/movies').then(movies => {
-        //     // Create fragment:
-        //     const fragment = document.createDocumentFragment();
 
-        //     // Get referenct to template: 
-        //     const template = document.querySelector('#movie-card-template').content 
+        function createMovieCards(movies) {
+            // First reset all movies to add new ones: 
+            moviesListContainer = document.querySelector('#movies-list')
+            articles = moviesListContainer.querySelectorAll(".movie-card");
+            for (const article of articles) {
+                moviesListContainer.removeChild(article)
+            }
 
-        //     // Generate all the movie cards: 
-        //     for(const movie of movies) {
-        //         // Create clone of the <article> given by the template: 
-        //         const movieCard = template.cloneNode(true);
+            // Create fragment:
+            const fragment = document.createDocumentFragment();
+
+            // Get referenct to template: 
+            const template = document.querySelector('#movie-card-template').content 
+
+            // Generate all the movie cards: 
+            for(const movie of movies) {
+                // Create clone of the <article> given by the template: 
+                const movieCard = template.cloneNode(true);
                 
-        //         // Modify data for these article:
-        //         movieCard.querySelector('img').src = movie.coverImage
-        //         movieCard.querySelector('img').alt = movie.title
-        //         movieCard.querySelector('.title').textContent = movie.title
+                // Modify data for these article:
+                movieCard.querySelector('img').src = movie.coverImage
+                movieCard.querySelector('img').alt = movie.title
+                movieCard.querySelector('.title').textContent = movie.title
 
-        //         // Grab reference to <ul>
-        //         const ul = movieCard.querySelector('.genres-list');
+                // Grab reference to <ul>
+                const ul = movieCard.querySelector('.genres-list');
 
-        //         // For all the genres, create <li> tags
-        //         for (const genre of movie.genres) {
-        //             // Create tag:
-        //             const li = document.createElement("li");
-        //             // Change text of the tag: 
-        //             li.textContent = genre
-        //             // Add genre to <ul> genres-list
-        //             ul.appendChild(li)
-        //         }
-
-        //         movieCard.querySelector('.rating').textContent = movie.rating
-        //         movieCard.querySelector('.description p').textContent = movie.description
-
-        //         movieCard.querySelector('.buttons .delete a').href = `./movies/delete?id=${movie.id}`
-        //         movieCard.querySelector('.buttons .edit a').href = `./movies/edit?id=${movie.id}`
-        //         movieCard.querySelector('.buttons .more-info a').href = `./movies/show?id=${movie.id}`
-
-        //         // Add card to fragment:
-        //         fragment.appendChild(movieCard)
-        //     }
-
-        //     // Grab a reference to where we'll put the fragment ()
-        //     const moviesList = document.querySelector('#movies-list');
-
-        //     // Add the fragment to DOM:
-        //     moviesList.appendChild(fragment);
-
-        // })
-
-        document.querySelector('.searcher-card').addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Get filtes from searcher card: 
-            movieTitle = document.querySelector('#movie-title').value
-            directorName = document.querySelector('#movie-directors').value
-
-            ratings = document.querySelectorAll("input[name='rating[]']")
-            for (const rating of ratings) {
-                if(rating.checked) {
-                    console.log("si")
+                // For all the genres, create <li> tags
+                for (const genre of movie.genres) {
+                    // Create tag:
+                    const li = document.createElement("li");
+                    // Change text of the tag: 
+                    li.textContent = genre
+                    // Add genre to <ul> genres-list
+                    ul.appendChild(li)
                 }
+
+                movieCard.querySelector('.rating').textContent = movie.rating
+                movieCard.querySelector('.description p').textContent = movie.description
+
+                movieCard.querySelector('.buttons .delete a').href = `./movies/delete?id=${movie.id}`
+                movieCard.querySelector('.buttons .edit a').href = `./movies/edit?id=${movie.id}`
+                movieCard.querySelector('.buttons .more-info a').href = `./movies/show?id=${movie.id}`
+
+                // Add card to fragment:
+                fragment.appendChild(movieCard)
             }
 
-            genres = document.querySelectorAll("input[name='tags[]']")
-            for (const tag of genres) {
-                if(tag.checked) {
-                    console.log("si")
-                }
-            }
+            // Grab a reference to where we'll put the fragment ()
+            const moviesList = document.querySelector('#movies-list');
 
-            let endPoint = 'http://imbd.test/api/movies?id=5&title=tenet&genres[]=horror&genres[]=adventure'
+            // Add the fragment to DOM:
+            moviesList.appendChild(fragment);
+        }
+
+        function createEndPoint() {
+            // Get filtes from searcher card and add the info to end point: 
+            let endPoint = 'http://imdb.test/api/movies?'
             
-            window.location.replace(endPoint)
+            // Add title to endpoint
+            movieTitle = document.querySelector('#movie-title').value
+            endPoint += `title=${movieTitle}`
 
-            // async function fetchData(endPoint) {
-            //     const response = await fetch(endPoint)
-            //     const movies = await response.json()
-            //     return movies
-            // }
+            // Add director to endpoint
+            directorName = document.querySelector('#movie-directors').value
+            endPoint += `&director-name=${directorName}`
 
-            // fetchData(endPoint).then(movies => {
-            //     console.log(movies)
-            // })
+            // Add ratings to endPoint
+            const ratingsList = document.querySelectorAll("input[name='rating[]']")
+            for (const rating of ratingsList) {
+                if(rating.checked) {
+                    endPoint += `&rating[]=${rating.value}`
+                }
+            }
 
+            // Add Genres to the endPoint
+            const genresList = document.querySelectorAll("input[name='tags[]']")
+            for (const tag of genresList) {
+                if(tag.checked) {
+                    endPoint += `&tags[]=${tag.value}`
+                }
+            } 
+
+            return endPoint
+        }
+
+        async function createDOMwith(endPoint) {
+            const response = await fetch(endPoint)
+            const movies = await response.json()
+            createMovieCards(movies);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createDOMwith('http://imbd.test/api/movies');
+            
+            document.querySelector('.searcher-card').addEventListener('submit', (e) => {
+                e.preventDefault();
+                endPoint = createEndPoint()
+                createDOMwith(endPoint);
+                //window.location.replace(endPoint)
+            })
         })
-        
-    </script>
+
+</script>
     
 </body>
 </html>
