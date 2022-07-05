@@ -50,7 +50,7 @@
             <option 
                 value = "<?= $director ?>"  
                 <?php if (isset($showInfo)): ?> 
-                    <?php if($movie[0]->getDirector->getName): ?>
+                    <?php if($movie[0]->getDirector()->getName()): ?>
                         <?= 'selected' ?>
                     <?php endif ?> 
                 <?php endif ?> 
@@ -68,7 +68,13 @@
         <?php foreach($listOfGenres as $genre) : ?>
             <div>
                 <label for=""><?= $genre ?></label>
-                <input type="checkbox" value="<?= $genre ?>" name="tags[]"></input>
+                <input type="checkbox" value="<?= $genre ?>" name="tags[]"
+                    <?php if (isset($showInfo)): ?> 
+                        <?php if(in_array($genre, $movie[0]->getGenres())): ?>
+                            <?= 'checked' ?>
+                        <?php endif ?>
+                    <?php endif ?> 
+                ></input>
             </div>
         <?php endforeach ?>
     </div>
@@ -76,15 +82,17 @@
     <label for="screen_shots">Screen Shots:</label>
     <input type="file" name="screen_shots[]" multiple></input>
 
-    <!-- <label for="screen_shots">Screen Shots:</label>
-    <input type="file" name="screen_shots[]" multiple></input>
 
-    <label for="screen_shots">Screen Shots:</label>
-    <input type="file" name="screen_shots[]" multiple></input>
+    <!-- Hidden input to send movie id to update page -->
+    <?php if($showInfo ?? ''): ?>
+        <input type="hidden" name="movie-id" value="<?= $movie[0]->getId() ?>"></input>
+        <input type="hidden" name="cover-image" value="<?= $movie[0]->getCoverImage() ?>"></input>
 
-    <label for="screen_shots">Screen Shots:</label>
-    <input type="file" name="screen_shots[]" multiple></input> -->
-
+        <?php foreach($movie[0]->getScreenShots() as $screenShot): ?>
+            <input type="hidden" name="screen-shots[]" value="<?= $showInfo ?? '' ? $screenShot : ''?>"></input>
+        <?php endforeach ?>
+    <?php endif ?>
+    
     <button type="submit">Submit</button> 
 
 </form> 

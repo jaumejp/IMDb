@@ -1,4 +1,5 @@
 <?php
+
     session_start();
     require 'database/dataBaseConnection.php';
     $conn = createConectionToDB();
@@ -13,31 +14,28 @@
     $validator = new FormValidator($listOfDirectors, $listOfGenres);
 
     require 'Support/MovieRepository.php';
+    require 'Support/MovieService.php'; 
 
-    if (! $validator->validate()) {
+    if (! $validator->validate(true)) {
         // Incorrect inputs:
         $error = $validator->message;
-        $_SESSION['flash_message'] = $error;
-        header("Location: /movies/edit");
+        $_SESSION['flash_message'] = $error;  
+
+        // Get info from the id given by the url:
+        $fetchMovie = (new MovieRepository($conn))->getMovieFromDirectorId($_POST["movie-id"]);
+        $movie = (new MovieService($conn))->parseListOfMovies($fetchMovie);
+        // Show the form with data on inputs:
+        $endpoint = '/movies/update'; 
+        $showInfo = true;
+
+        header("Location: /movies/edit?id=".$_POST["movie-id"]);
         exit;
 
     } else {
         // Inputs correct, edit  BBDD:
-        //$editMovie = new MovieRepository($_POST["title"], $_POST["description"], $_POST["rating"], $_FILES["cover-image"], $_POST["resume"], $_POST["director-name"], $_POST["tags"], $_FILES["screen_shots"]["name"], $conn);
-        // Com puc accedir a l'id de la peli, si estic amb una petició post, input invisible?
-        //$editMovie->editMovie($id);
+        $editMovie = new MovieRepository($conn);
+        $editMovie->editMovie($_POST["movie-id"], $_POST["title"], $_POST["description"], $_POST["rating"], $_FILES["cover-image"], $_POST["resume"], $_POST["director-name"], $_POST["tags"], $_FILES["screen_shots"]["name"]);
         header("Location: /");
         die();
 
     }
-
-     
-   // TODO
-
-   // validate inputs. 
-
-   // if correct, update movie
-
-   // Go to home page
-
-    

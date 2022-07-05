@@ -96,7 +96,58 @@
     
         }
 
-        public function editMovie($id) { 
+        public function editMovie($id, $title, $description, $rating, $coverImage, $resume, $directorName, $tags, $screenShotUrls) { 
+
+            // // Update movies table: 
+            // // Get director id from their name: 
+            // $statement = $this->conn->prepare("SELECT id FROM directors WHERE name = :movie_director");
+            // $statement->bindParam(":movie_director", $directorName);
+            // $statement->execute();  
+            // $director = $statement->fetch();
+            // $directorId = $director['id'];
+
+            // $query = "UPDATE movies set title = :title, description = :description, rating = :rating, cover_image = :cover_image, director = :director_id, summary = :summary WHERE id = :movie_id";
+            // $statement = $this->conn->prepare($query);
+            // $statement->bindParam(":movie_id", $id);
+            // $statement->bindParam(":title", $title);
+            // $statement->bindParam(":description", $description);
+            // $statement->bindParam(":rating", $rating);
+            // $statement->bindParam(":cover_image", $coverImage);
+            // $statement->bindParam(":director_id", $directorId);
+            // $statement->bindParam(":summary", $resume);
+
+            // $statement->execute(); 
+            
+            // // Update screen_shots
+            // // Delete all screen shots from these movie and add it again
+
+
+            // Update tags. Delete all tags from these movie and add it again
+            $query = "DELETE FROM genres_of_movies WHERE movie_id = :movie_id";
+            $statement = $this->conn->prepare($query);
+            $statement->bindParam(":movie_id", $id);
+            $statement->execute(); 
+
+            // Get array with all genres id: 
+            $genresIdList = array();
+            foreach($tags as $tag) {
+                $statement = $this->conn->prepare("SELECT id FROM genres WHERE genere = :genere");
+                $statement->bindParam(":genere", $tag);
+                $statement->execute();  
+                $genere = $statement->fetch();
+                $genereId = $genere['id'];
+                $genresIdList[] = $genereId;
+            }
+
+            // Add tags:
+            foreach($genresIdList as $genreId) {
+                $statement = $this->conn->prepare("INSERT INTO genres_of_movies (movie_id, genre_id) VALUES (movie_id = :movie_id, genre_id = :genre_id)");
+                $statement->bindParam(":movie_id", $id);
+                $statement->bindParam(":genre_id", $genreId);
+                $statement->execute();  
+            }
+
+            
 
         }
 

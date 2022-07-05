@@ -12,7 +12,7 @@ class FormValidator
     }
 
     // Validate the form:
-    public function validate(): bool {
+    public function validate($editForm = false): bool {
         if (! $this->allInputsFilled($_POST["title"], $_POST["resume"], $_POST["description"])) {
             $this->message = "Please fill all the fields";
             return false;
@@ -21,7 +21,7 @@ class FormValidator
             $this->message = "Rating must be between 0 and 10";
             return false;
     
-        } else if (! $this->imageOK($_FILES["cover-image"])) {
+        } else if (! $this->imageOK($_FILES["cover-image"], $editForm)) {
             $this->message = "Upload a valid cover image";
             return false;
     
@@ -36,7 +36,7 @@ class FormValidator
             $this->message = "Enter a valid genres";
             return false;
     
-        } else if (! $this->screenShotsOK($_FILES["screen_shots"])) {
+        } else if (! $this->screenShotsOK($_FILES["screen_shots"], $editForm)) {
             $this->message = "Upload valid screen shots";
             return false;
 
@@ -68,9 +68,12 @@ class FormValidator
         return true;
     }
     // Validate image: 
-    private function imageOK($image) {
+    private function imageOK($image, $editForm) {
         // Check if the image exists:
         if (empty($image["size"])) {
+            if ($editForm) {
+                return true;
+            }
             return false; 
         }
         // Check if the image has one allowed extension: 
@@ -101,10 +104,13 @@ class FormValidator
         return true;
     }
     // Validate screen Shots:
-    private function screenShotsOK($screenShots) {
-
+    private function screenShotsOK($screenShots, $editForm) {
+        
         // Check if the image exists:
-        if (empty($screenShots["size"])) {
+            if (empty($screenShots["size"][0])) {
+            if ($editForm) {
+                return true;
+            }
             return false; 
         }
         // Check if the image has one allowed extension:
