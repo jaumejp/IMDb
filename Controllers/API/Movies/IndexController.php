@@ -14,6 +14,8 @@
     $data = getData();
 
     $query = createQueryFor($data);
+    //echo $query; die(); // es veu a inspeccionar response on fa la petició.
+    
     $movies =  (new MovieRepository($conn))->getDataFor($query);
 
     $listOfMovies = [];
@@ -27,7 +29,6 @@
         $listOfMovies = (new MovieService($conn))->parseListOfMovies($movies);
         $JSONmovies = (new MovieService($conn))->parseToJson($listOfMovies);
     }
-    
 
     echo($JSONmovies); 
 

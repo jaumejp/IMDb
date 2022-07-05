@@ -221,7 +221,7 @@
                 movieCard.querySelector('.rating').textContent = movie.rating
                 movieCard.querySelector('.description p').textContent = movie.description
 
-                movieCard.querySelector('.buttons .delete a').href = `./movies/delete?id=${movie.id}`
+                //movieCard.querySelector('.buttons .delete a').href = `./movies/delete?id=${movie.id}` // We need JavaScript here..
                 movieCard.querySelector('.buttons .edit a').href = `./movies/edit?id=${movie.id}`
                 movieCard.querySelector('.buttons .more-info a').href = `./movies/show?id=${movie.id}`
 
@@ -248,8 +248,8 @@
             
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            createDOMwith('http://imbd.test/api/movies');
+        async function loadDOM() {
+            await createDOMwith('http://imbd.test/api/movies');
             
             document.querySelector('.searcher-card').addEventListener('submit', (e) => {
                e.preventDefault();
@@ -257,7 +257,15 @@
                 //window.location.replace(endPoint)
                 createDOMwith(endPoint);
             })
-        })
+            //console.log(document.querySelectorAll('.delete'))
+
+            document.querySelectorAll('.buttons .delete').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    console.log(e.target.parentNode.parentNode.parentNode.parentNode.querySelector('.title').textContent)
+                })})
+        }
+        loadDOM()
 
 </script>
     
