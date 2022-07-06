@@ -172,12 +172,15 @@
                 $statement->bindParam(":movie_id", $id);
                 $statement->execute(); 
             } catch (Exception $e) {
-                $this->message = "An error occurred!";
+                //$this->message = "An error occurred!";
+                $this->message = "An error occurred! Movie has not been deleted";
                 return false;
 
             }
 
-            $this->message = "<span>" . $movieTitle . "</span>" . " deleted correctly!";
+            //$this->message = "<span>" . $movieTitle . "</span>" . " deleted correctly!";
+            $this->message = "Movie deleted correctly";
+
             return true;
         }   
 

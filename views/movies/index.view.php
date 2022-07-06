@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./Styles/generalStyles.css">
     <link rel="stylesheet" href="./Styles/cardStyles.css">
     <link rel="stylesheet" href="./Styles/genresStyles.css"> 
+    <script src="../../scripts/script.js" type="module"></script>
+
     <style>
         /* Desde l'arxiu css no funciona */
         .error-message span{
@@ -113,9 +115,9 @@
                     <div class="description">
                         <p>--MovieDescription--</p>
                         <div class="buttons">
-                            <button class="btn delete"><a href="">Delete</a></button>
+                            <button type='button' class="btn delete"><a href="">Delete</a></button>
                             <button class="btn edit"><a href="">Edit</a></button>
-                            <button class="btn more-info"><a href="">More info</a></button>
+                            <button class="btn more-info" data-movieId=""><a href="">More info</a></button>
                         </div>
                     </div>
                 </article>
@@ -124,13 +126,13 @@
 
         <!-- Delete Pop up container -->
         <section class="pop-up-container">
-            <div class="pop-up">
+            <div class="pop-up" data-movid="">
                 <img src="./images/icons/close.png" alt="close-icon" class="btn-close">
                 <p class="pop-up-title delete-title">Unexpected bad things will happen if you don’t read this!</p>
                 <p>This action cannot be undone. This will permanently delete the movie card: <span class="delete-message">title, summary, description, rating, genres and all related images of the movie</span></p>
-                <p>Please type <span class="delete-message">movie-title/director</span> to confirm.</p>
-                <input class="wrong" type="text" placeholder="movie-title/director">
-                <button class="btn btn-delete">Delete</button>
+                <p>Please type <span class="delete-message" id="name-verification">delete/movie-title</span> to confirm.</p>
+                <input type="text" placeholder="delete/movie-title" id="input-movie-delete"> <!-- es pot afegir la class="wrong" / success -->
+                <button class="btn btn-delete" id="delete-button-popup">Delete</button>
             </div>
         </section>
     </main>
@@ -139,135 +141,6 @@
     <footer>
         <p>Some legat text here</p>
     </footer>
-
-    <script>
-
-        function createEndPoint() {
-            // Get filtes from searcher card and add the info to end point: 
-            let endPoint = 'http://imbd.test/api/movies?'
-            
-            // Add title to endpoint
-            movieTitle = document.querySelector('#movie-title').value
-            endPoint += `title=${movieTitle}`
-
-            // Add director to endpoint
-            directorName = document.querySelector('#movie-directors').value
-            endPoint += `&director-name=${directorName}`
-
-            // Add ratings to endPoint
-            const ratingsList = document.querySelectorAll("input[name='rating[]']")
-            for (const rating of ratingsList) {
-                if(rating.checked) {
-                    endPoint += `&rating[]=${rating.value}`
-                }
-            }
-
-            // Add Genres to the endPoint
-            const genresList = document.querySelectorAll("input[name='tags[]']")
-            for (const tag of genresList) {
-                if(tag.checked) {
-                    endPoint += `&tags[]=${tag.value}`
-                }
-            } 
-
-            return endPoint
-        }
-
-        function createMovieCards(movies, moviesFounded=true) {
-            // First reset all movies to add new ones: 
-            moviesListContainer = document.querySelector('#movies-list')
-            articles = moviesListContainer.querySelectorAll(".movie-card");
-            for (const article of articles) {
-                moviesListContainer.removeChild(article)
-            }
-            // Delete error message:
-            const notFoundMessage = document.querySelector('#error-message')
-            notFoundMessage.textContent = ''
-
-            if (!moviesFounded) {
-                notFoundMessage.textContent = 'No Movies Founded!' 
-                return;
-            } 
-        
-            // Create fragment to avoid reflow:
-            const fragment = document.createDocumentFragment();
-
-            // Get reference to template: 
-            const template = document.querySelector('#movie-card-template').content 
-
-            // Generate all the movie cards: 
-            for(const movie of movies) {
-                // Create clone of the <article> given by the template: 
-                const movieCard = template.cloneNode(true);
-                
-                // Modify data for these article:
-                movieCard.querySelector('img').src = movie.coverImage
-                movieCard.querySelector('img').alt = movie.title
-                movieCard.querySelector('.title').textContent = movie.title
-
-                // Grab reference to <ul>
-                const ul = movieCard.querySelector('.genres-list');
-
-                // For all the genres, create <li> tags
-                for (const genre of movie.genres) {
-                    // Create tag:
-                    const li = document.createElement("li");
-                    // Change text of the tag: 
-                    li.textContent = genre
-                    // Add genre to <ul> genres-list
-                    ul.appendChild(li)
-                }
-
-                movieCard.querySelector('.rating').textContent = movie.rating
-                movieCard.querySelector('.description p').textContent = movie.description
-
-                //movieCard.querySelector('.buttons .delete a').href = `./movies/delete?id=${movie.id}` // We need JavaScript here..
-                movieCard.querySelector('.buttons .edit a').href = `./movies/edit?id=${movie.id}`
-                movieCard.querySelector('.buttons .more-info a').href = `./movies/show?id=${movie.id}`
-
-                // Add card to fragment:
-                fragment.appendChild(movieCard)
-            }
-
-            // Grab a reference to where we'll put the fragment
-            const moviesList = document.querySelector('#movies-list');
-
-            // Add the fragment to DOM:
-            moviesList.appendChild(fragment);
-        }
-
-        async function createDOMwith(endPoint) {
-            const response = await fetch(endPoint)
-            const movies = await response.json()
-
-            if (movies.length === 0) {
-                createMovieCards(movies, false);
-            } else {
-                createMovieCards(movies);
-            }
-            
-        }
-
-        async function loadDOM() {
-            await createDOMwith('http://imbd.test/api/movies');
-            
-            document.querySelector('.searcher-card').addEventListener('submit', (e) => {
-               e.preventDefault();
-                endPoint = createEndPoint()
-                //window.location.replace(endPoint)
-                createDOMwith(endPoint);
-            })
-            //console.log(document.querySelectorAll('.delete'))
-
-            document.querySelectorAll('.buttons .delete').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault()
-                    console.log(e.target.parentNode.parentNode.parentNode.parentNode.querySelector('.title').textContent)
-                })})
-        }
-        loadDOM()
-
-</script>
     
 </body>
 </html>

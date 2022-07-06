@@ -217,13 +217,13 @@ section.create-movie {
     background-color: lightgoldenrodyellow;
 }
 
-.pop-up-container.show .success {
+/* .pop-up-container.show .success {
     border: 1px solid lightgreen;
 }
 
 .pop-up-container.show .wrong {
     border: 1px solid lightcoral;
-}
+} */
 
 /*
 ===========================================================================
