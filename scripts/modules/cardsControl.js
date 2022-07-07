@@ -1,22 +1,35 @@
+import { closePopUp } from "../../PopUpDependencies/popUpControl.js";
 import { createEndPoint, fetchDataFrom } from "./fetch.js";
 
-export function eventForSubmitFilters() {
-    document.querySelector('.searcher-card').addEventListener('submit', (e) => {
-        e.preventDefault();
-        async function showFilteredMovies() {
-             const endPoint = createEndPoint()
-             const movies = await fetchDataFrom(endPoint);
-             display(movies)
-         }
-         showFilteredMovies()
-     })
+export function showMoviesFromFilters(e) {
+    e.preventDefault();
+    async function showFilteredMovies() {
+         const endPoint = createEndPoint()
+         const movies = await fetchDataFrom(endPoint);
+         display(movies)
+     }
+     showFilteredMovies()
 }
 export async function showAllMovies() {
     const movies = await fetchDataFrom('http://imbd.test/api/movies');
     display(movies)
 }
 
+export async function deleteMovie(e) {     
+
+    // Get id from data atributes on the pop up container
+    const movieId = document.querySelector('.pop-up').dataset.movid
+
+    await fetch(`http://imbd.test/api/delete?id=${movieId}`)
+
+    closePopUp()
+
+    showMoviesFromFilters(e)
+    
+}
+
 function display(movies) {
+
     if (movies.length === 0) {
         noMoviesFounded()
     } else {
@@ -32,14 +45,13 @@ function cleanPage() {
         moviesListContainer.removeChild(article)
     }
     // Delete error message:
-    const notFoundMessage = document.querySelector('#error-message')
-    notFoundMessage.textContent = ''
+    document.querySelector('#error-message').textContent = ''
 }
 
 function noMoviesFounded() {
     cleanPage()
     // Display error message
-    document.querySelector('#error-message').textContent = 'No Movies Founded!' 
+    document.querySelector('#error-message').textContent = 'No Movies Found!' 
 }
 
 function createMovieCards(movies) {

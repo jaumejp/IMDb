@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="./Styles/generalStyles.css">
     <link rel="stylesheet" href="./Styles/cardStyles.css">
     <link rel="stylesheet" href="./Styles/genresStyles.css"> 
+    <link rel="stylesheet" href="../../PopUpDependencies/popUpStyles.css"> 
+
     <script src="../../scripts/script.js" type="module"></script>
+    <script src="../../PopUpDependencies/popUpControl.js" type="module"></script>
 
     <style>
         /* Desde l'arxiu css no funciona */
@@ -115,7 +118,7 @@
                     <div class="description">
                         <p>--MovieDescription--</p>
                         <div class="buttons">
-                            <button type='button' class="btn delete"><a href="">Delete</a></button>
+                            <button type='button' class="btn delete">Delete</button>
                             <button class="btn edit"><a href="">Edit</a></button>
                             <button class="btn more-info" data-movieId=""><a href="">More info</a></button>
                         </div>
@@ -124,15 +127,16 @@
             </template>            
         </section>
 
-        <!-- Delete Pop up container -->
+        <!--Pop up-->
         <section class="pop-up-container">
             <div class="pop-up" data-movid="">
-                <img src="./images/icons/close.png" alt="close-icon" class="btn-close">
-                <p class="pop-up-title delete-title">Unexpected bad things will happen if you don’t read this!</p>
+            <p class="pop-up-title">Unexpected bad things will happen if you don’t read this!</p>
                 <p>This action cannot be undone. This will permanently delete the movie card: <span class="delete-message">title, summary, description, rating, genres and all related images of the movie</span></p>
-                <p>Please type <span class="delete-message" id="name-verification">delete/movie-title</span> to confirm.</p>
-                <input type="text" placeholder="delete/movie-title" id="input-movie-delete"> <!-- es pot afegir la class="wrong" / success -->
-                <button class="btn btn-delete" id="delete-button-popup">Delete</button>
+                <p>You will delete: <span class="delete-message" id="name-verification">movie-title</span>.</p>
+                <div>
+                    <button class="btn" id="delete-movie-ok">Accept</button>
+                    <button class="btn" id="delete-movie-cancel">Cancel</button>
+                </div>
             </div>
         </section>
     </main>

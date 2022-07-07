@@ -73,20 +73,6 @@ section {
     font-weight: normal;   
 }
 
-/* .genres ul {
-    display: flex;
-    gap: 1em;
-    flex-wrap: wrap;
-}
-.genres ul li {
-    list-style: none;
-    border: 1px solid #aaa;
-    padding: 3px 9px;
-    font-size: smaller;
-    border-radius: 15px;
-    color: #aaa;
-} */
-
 .rating {
     background-color: lightgreen;
     color: #fff;
@@ -109,8 +95,8 @@ section {
 }
 
 .searcher-container input,
-.searcher-card select,
-.pop-up input {
+.searcher-card select{
+
     padding: 4px 12px;
     border-radius: 5px;
     outline: none;
@@ -125,9 +111,9 @@ section {
     padding: 5px 15px;
     border-radius: 5px;
 }
-.btn-delete {
+/* .btn-delete {
     background-color: white;
-    color: lightcoral;
+    color: black;
     border: 2px solid lightcoral;
     font-size: 16px;
 }
@@ -137,7 +123,7 @@ section {
     border: 2px solid lightskyblue;
     font-size: 16px;
 
-}
+} */
 .btn:hover {
     box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24) ;
 }
@@ -151,7 +137,7 @@ section {
     color: #fff;
 }
 
-
+/* 
 section.pop-up-container,
 section.create-movie {
     padding: 0;
@@ -192,18 +178,18 @@ section.create-movie {
     text-align: center;
     border-radius: 10px;
     box-shadow: 0px 3px 8px rgba(255,255,255, 0.24) ;
-}
+} */
 
-.btn-close {
+/* .btn-close {
     width: 18px;
     height: 18px;
     position: absolute;
     top: 2%;
     left: 96%;
     cursor: pointer;
-}
+} */
 
-.delete-message {
+/* .delete-message {
     font-weight: bold;
 }
 
@@ -215,14 +201,6 @@ section.create-movie {
 
 .delete-title {
     background-color: lightgoldenrodyellow;
-}
-
-/* .pop-up-container.show .success {
-    border: 1px solid lightgreen;
-}
-
-.pop-up-container.show .wrong {
-    border: 1px solid lightcoral;
 } */
 
 /*
