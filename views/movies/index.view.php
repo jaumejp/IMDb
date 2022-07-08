@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./Styles/cardStyles.css">
     <link rel="stylesheet" href="./Styles/genresStyles.css"> 
     <link rel="stylesheet" href="../../PopUpDependencies/popUpStyles.css"> 
+    <link rel="stylesheet" href="./Styles/deletePopUp.css">
+    <link rel="stylesheet" href="./Styles/editPopUp.css">
 
     <script src="../../scripts/script.js" type="module"></script>
     <script src="../../PopUpDependencies/popUpControl.js" type="module"></script>
@@ -119,26 +121,27 @@
                         <p>--MovieDescription--</p>
                         <div class="buttons">
                             <button type='button' class="btn delete">Delete</button>
-                            <button class="btn edit"><a href="">Edit</a></button>
-                            <button class="btn more-info" data-movieId=""><a href="">More info</a></button>
+                            <button type='button' class="btn edit" data-movid="">Edit</button>
+                            <button type='button' class="btn more-info" data-movid="">More Info</button>
                         </div>
                     </div>
                 </article>
             </template>            
         </section>
 
-        <!--Pop up-->
-        <section class="pop-up-container">
-            <div class="pop-up" data-movid="">
-            <p class="pop-up-title">Unexpected bad things will happen if you don’t read this!</p>
-                <p>This action cannot be undone. This will permanently delete the movie card: <span class="delete-message">title, summary, description, rating, genres and all related images of the movie</span></p>
-                <p>You will delete: <span class="delete-message" id="name-verification">movie-title</span>.</p>
-                <div>
-                    <button class="btn" id="delete-movie-ok">Accept</button>
-                    <button class="btn" id="delete-movie-cancel">Cancel</button>
-                </div>
+        <!--Delete Pop up-->
+        <div class="pop-up-container" id="delete-pop-up">
+            <div class="pop-up pop-up-delete">
+                <?php require 'views/components/deletePopUp.php' ?>
             </div>
-        </section>
+        </div>
+        <!--Edit Pop up-->
+        <div class="pop-up-container" id="edit-pop-up">
+            <div class="pop-up pop-up-edit">
+                <?php require 'views/components/editPopUp.php' ?>
+            </div>
+        </div>
+
     </main>
 
     <!--Footer-->

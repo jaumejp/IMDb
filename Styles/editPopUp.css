@@ -1,0 +1,14 @@
+form {
+    display: flex;
+    flex-direction:column;
+    gap: 0.3em;
+}
+.genres-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2em;
+}
+form .btn {
+    width: fit-content;
+    margin: 15px 0;
+}

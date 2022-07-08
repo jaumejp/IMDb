@@ -1,0 +1,19 @@
+.pop-up-delete {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+.delete-message {
+    font-weight: bold;
+}
+
+.pop-up-title {
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: 2px solid #0002;
+    background-color: lightgoldenrodyellow;
+}

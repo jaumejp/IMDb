@@ -1,17 +1,14 @@
-
-section.pop-up-container {
+.pop-up-container {
     padding: 0;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.pop-up-container {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
-    width: 100%;
+    width: 100%; 
     background-color: #0009;
     pointer-events: none;
     opacity: 0;
@@ -28,24 +25,8 @@ section.pop-up-container {
     width: 70%;
     margin: 50px;
     padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     border-radius: 10px;
     box-shadow: 0px 3px 8px rgba(255,255,255, 0.24) ;
-    position: relative;
-}
-
-.delete-message {
-    font-weight: bold;
-}
-
-.pop-up-title {
-    padding: 10px 30px;
-    border-radius: 10px;
-    border: 2px solid #0002;
-    background-color: lightgoldenrodyellow;
+    height: 350px;
+    overflow-y: scroll;
 }

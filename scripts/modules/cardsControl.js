@@ -18,14 +18,23 @@ export async function showAllMovies() {
 export async function deleteMovie(e) {     
 
     // Get id from data atributes on the pop up container
-    const movieId = document.querySelector('.pop-up').dataset.movid
-
+    
+    const movieId = document.querySelector('#movie-id').dataset.movid
+ 
     await fetch(`http://imbd.test/api/delete?id=${movieId}`)
 
-    closePopUp()
+    closePopUp('#delete-pop-up')
 
     showMoviesFromFilters(e)
     
+}
+
+export async function editMovie(e) {
+ 
+    closePopUp('#edit-pop-up')
+
+    showMoviesFromFilters(e)
+
 }
 
 function display(movies) {
@@ -91,8 +100,8 @@ function createMovieCards(movies) {
         movieCard.querySelector('.description p').textContent = movie.description
 
         movieCard.querySelector('.buttons .delete').dataset.movid = movie.id
-        movieCard.querySelector('.buttons .edit a').href = `./movies/edit?id=${movie.id}`
-        movieCard.querySelector('.buttons .more-info a').href = `./movies/show?id=${movie.id}`
+        movieCard.querySelector('.buttons .edit').dataset.movid = movie.id
+        movieCard.querySelector('.buttons .more-info').dataset.movid = movie.id
 
         // Add card to fragment:
         fragment.appendChild(movieCard)

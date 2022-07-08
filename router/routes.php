@@ -33,6 +33,8 @@
 
     $router->get('api/delete', 'Controllers/API/Movies/DeleteController.php');
 
+    $router->get('api/show', 'Controllers/API/Movies/ShowController.php');
+
     //
 
     $router->get('notFound', 'views/notFound.view.php');

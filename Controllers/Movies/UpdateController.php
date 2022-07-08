@@ -1,5 +1,6 @@
 <?php
-
+    var_dum("hola"); die();
+    
     session_start();
     require 'database/dataBaseConnection.php';
     $conn = createConectionToDB();
