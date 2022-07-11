@@ -1,7 +1,6 @@
 <?php
-    var_dum("hola"); die();
-    
-    session_start();
+
+session_start();
     require 'database/dataBaseConnection.php';
     $conn = createConectionToDB();
 
@@ -16,8 +15,10 @@
 
     require 'Support/MovieRepository.php';
     require 'Support/MovieService.php'; 
-
-    if (! $validator->validate(true)) {
+    
+    $editForm = true;
+    
+    if (! $validator->validate($editForm)) {
         // Incorrect inputs:
         $error = $validator->message;
         $_SESSION['flash_message'] = $error;  
@@ -35,7 +36,20 @@
     } else {
         // Inputs correct, edit  BBDD:
         $editMovie = new MovieRepository($conn);
-        $editMovie->editMovie($_POST["movie-id"], $_POST["title"], $_POST["description"], $_POST["rating"], $_FILES["cover-image"], $_POST["resume"], $_POST["director-name"], $_POST["tags"], $_FILES["screen_shots"]["name"]);
+
+        if (empty($_FILES['cover-image']['name'])) {
+            $image = $_POST['old-cover-image'];
+        } else {
+            $image = $_FILES['cover-image'];
+        }
+
+        if (empty($_FILES['screen_shots']['name'][0])) {
+            $screenShots = $_POST['old_screen-shots'];
+        } else {
+            $screenShots = $_FILES['screen_shots'];
+        }
+
+        $editMovie->editMovie($_POST["movie-id"], $_POST["title"], $_POST["description"], $_POST["rating"], $image, $_POST["resume"], $_POST["director-name"], $_POST["tags"], $screenShots);
         header("Location: /");
         die();
 

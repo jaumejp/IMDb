@@ -16,6 +16,7 @@
 
         //These function recives the database registers and return an array of objects of the class Movie.
         public function parseListOfMovies($movies) {
+            //$listOfMovies = array();
 
             // Canviar que no per cada iteració del bucle es faci una select dels directors, Fer-ne un primer i després iterar a partir del array.
 

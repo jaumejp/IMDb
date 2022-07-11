@@ -36,18 +36,16 @@
     </div>
 
     <label for="screen_shots">Screen Shots:</label>
-    <input type="file" name="screen_shots[]" multiple></input>
+    <input id="screen-shot" type="file" name="screen_shots[]" multiple></input>
 
 
     <!-- Hidden input to send movie id to update page -->
 
-    <input id='movie-id' type="hidden" name="movie-id" value=""></input>
+    <input id='movie-id' type="hidden" name="movie-id"></input>
 
-    <input id='cover-image' type="hidden" name="cover-image" value="ddd"></input>
+    <input id='hidden-cover-image' type="hidden" name="old-cover-image"></input>
 
-    <?php foreach($screenShot as $screenShot): ?>
-        <input type="hidden" name="screen-shots[]" ></input>
-    <?php endforeach ?>
+    <div id='old-screen-shots'></div>
 
 
     <button id='edit-movie-btn' class="btn" type="submit">Submit</button> 

@@ -97,30 +97,67 @@
         }
 
         public function editMovie($id, $title, $description, $rating, $coverImage, $resume, $directorName, $tags, $screenShotUrls) { 
+            // var_dump($id); echo '<br><br>';
+            // var_dump($title); echo '<br><br>';
+            // var_dump($description); echo '<br><br>';
+            // var_dump($rating); echo '<br><br>';
+            // var_dump($coverImage); echo '<br><br>';
+            // var_dump($resume); echo '<br><br>';
+            // var_dump($directorName); echo '<br><br>';
+            // var_dump($tags); echo '<br><br>';
+            // var_dump($screenShotUrls); echo '<br><br>';
+            // die();
 
             // // Update movies table: 
             // // Get director id from their name: 
-            // $statement = $this->conn->prepare("SELECT id FROM directors WHERE name = :movie_director");
-            // $statement->bindParam(":movie_director", $directorName);
-            // $statement->execute();  
-            // $director = $statement->fetch();
-            // $directorId = $director['id'];
+            if (!empty($coverImage['name'])) {
+                $coverImage = $this->getLocalImagePath($coverImage);
+            }
 
-            // $query = "UPDATE movies set title = :title, description = :description, rating = :rating, cover_image = :cover_image, director = :director_id, summary = :summary WHERE id = :movie_id";
-            // $statement = $this->conn->prepare($query);
-            // $statement->bindParam(":movie_id", $id);
-            // $statement->bindParam(":title", $title);
-            // $statement->bindParam(":description", $description);
-            // $statement->bindParam(":rating", $rating);
-            // $statement->bindParam(":cover_image", $coverImage);
-            // $statement->bindParam(":director_id", $directorId);
-            // $statement->bindParam(":summary", $resume);
+            $statement = $this->conn->prepare("SELECT id FROM directors WHERE name = :movie_director");
+            $statement->bindParam(":movie_director", $directorName);
+            $statement->execute();  
+            $director = $statement->fetch();
+            $directorId = $director['id'];
 
-            // $statement->execute(); 
-            
-            // // Update screen_shots
-            // // Delete all screen shots from these movie and add it again
+            $query = "UPDATE movies set title = :title, description = :description, rating = :rating, cover_image = :cover_image, director_id = :director_id, summary = :summary WHERE id = :movie_id";
+            $statement = $this->conn->prepare($query);
+            $statement->bindParam(":movie_id", $id);
+            $statement->bindParam(":title", $title);
+            $statement->bindParam(":description", $description);
+            $statement->bindParam(":rating", $rating);
+            $statement->bindParam(":cover_image", $coverImage);
+            $statement->bindParam(":director_id", $directorId);
+            $statement->bindParam(":summary", $resume);
 
+            $statement->execute(); 
+
+            // Update screen shots
+            $query = "DELETE FROM screen_shots WHERE movie_id = :movie_id";
+            $statement = $this->conn->prepare($query);
+            $statement->bindParam(":movie_id", $id);
+            $statement->execute(); 
+            // Add screen shots:
+            if (empty($screenShotUrls['name'][0])) {
+                // old - no es necessari fer això
+                foreach($screenShotUrls as $screenShot) {
+                    $statement = $this->conn->prepare("INSERT INTO screen_shots (url, movie_id) VALUES (:url, :movie_id)");
+                    $statement->bindParam(":url", $screenShot);
+                    $statement->bindParam(":movie_id", $id);
+                    $statement->execute();
+                }  
+            } else {
+                // new
+                $insertScreenShot = $this->conn->prepare("INSERT INTO screen_shots (url, movie_id) VALUES (:url, :movie_id)");
+                for ($i = 0; $i < sizeof($screenShotUrls["name"]); $i++) {
+                    $screenShotName = $screenShotUrls["name"][$i];
+                    $tempUrl = $screenShotUrls["tmp_name"][$i];
+                    $screenShotUrl = $this->getLocalScreenShotPath($screenShotName, $tempUrl);
+                    $insertScreenShot->bindParam(":url", $screenShotUrl);
+                    $insertScreenShot->bindParam(":movie_id", $id);
+                    $insertScreenShot->execute();
+                }
+            }
 
             // Update tags. Delete all tags from these movie and add it again
             $query = "DELETE FROM genres_of_movies WHERE movie_id = :movie_id";
@@ -138,10 +175,10 @@
                 $genereId = $genere['id'];
                 $genresIdList[] = $genereId;
             }
-
+            //var_dump($genresIdList); var_dump($id); die();
             // Add tags:
+            $statement = $this->conn->prepare("INSERT INTO genres_of_movies (movie_id, genre_id) VALUES (:movie_id, :genre_id)");
             foreach($genresIdList as $genreId) {
-                $statement = $this->conn->prepare("INSERT INTO genres_of_movies (movie_id, genre_id) VALUES (movie_id = :movie_id, genre_id = :genre_id)");
                 $statement->bindParam(":movie_id", $id);
                 $statement->bindParam(":genre_id", $genreId);
                 $statement->execute();  

@@ -97,23 +97,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 document.querySelector('#edit-movie-form #movie-id').value = movie[0].id
-                console.log(movie[0].coverImage)
-                document.querySelector('#edit-movie-form #cover-image').value = movie[0].coverImage
 
+                document.querySelector('#hidden-cover-image').value = movie[0].coverImage
 
+                const screenShotsContainer = document.querySelector('#old-screen-shots')
+                const screenShots = movie[0].movieScreenShots
 
+                for (const screenShot of screenShots) {
+                    const input = document.createElement('input')
+                    input.type = 'hidden'
+                    input.name = 'old_screen-shots[]'
+                    input.value = screenShot
+                    screenShotsContainer.appendChild(input)
+                }
 
+                // Any previous selected image or screen shot
+                document.querySelector('#cover-image').value = null;
+                document.querySelector('#screen-shot').value = null;
 
-            
                 showPopUp('#edit-pop-up') 
             }
+
             getMovieToEdit(e, movieId)      
             
         
         })
-
-        // Event to edit movie: 
-        document.querySelector('#edit-movie-btn').addEventListener('submit', (e) => { console.log("hola") })
 
         // Event to close edit pop up 
         document.querySelector('#close-edit-form').addEventListener('click', () => { closePopUp('#edit-pop-up') })

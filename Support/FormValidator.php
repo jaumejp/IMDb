@@ -43,6 +43,7 @@ class FormValidator
         } else {
             return true;
         }
+        return true;
     }
 
     // Check if all inputs are filled:
