@@ -1,5 +1,6 @@
 import { closePopUp } from "../../PopUpDependencies/popUpControl.js";
 import { createEndPoint, fetchDataFrom } from "./fetch.js";
+import { openDeletePopUp, openEditPopUp } from "./popUp.js";
 
 export function showMoviesFromFilters(e) {
     e.preventDefault();
@@ -9,6 +10,7 @@ export function showMoviesFromFilters(e) {
          display(movies)
      }
      showFilteredMovies()
+
 }
 export async function showAllMovies() {
     const movies = await fetchDataFrom('http://imbd.test/api/movies');
@@ -29,13 +31,6 @@ export async function deleteMovie(e) {
     
 }
 
-export async function editMovie(e) {
- 
-    closePopUp('#edit-pop-up')
-
-    showMoviesFromFilters(e)
-
-}
 
 function display(movies) {
 
@@ -112,4 +107,33 @@ function createMovieCards(movies) {
 
     // Add the fragment to DOM:
     moviesList.appendChild(fragment);
+
+
+
+    // Events to open delete pop up: 
+    document.querySelectorAll('.btn.edit').forEach(btn => btn.addEventListener('click', (e) => {
+        openDeletePopUp(e)
+    }))
+
+    // Events to open edit pop up: 
+    document.querySelectorAll('.btn.edit').forEach(btn => btn.addEventListener('click', (e) => {
+        openEditPopUp(e)
+    }))
+
+    // Event to show movie page: 
+    document.querySelectorAll('.btn.more-info').forEach(btn => btn.addEventListener('click', (e) => {
+        showMovie(e)
+    }))
+}
+
+function showMovie(e) {
+    e.preventDefault()
+
+    const elementClicked = e.target 
+
+    if (!elementClicked.classList.contains('more-info')) return false;
+
+    const movieId = elementClicked.dataset.movid;
+ 
+    window.location.replace(`movies/show?id=${movieId}`)
 }
