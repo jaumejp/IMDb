@@ -36,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch('http://imbd.test/api/update', { method: "POST", body: data })
                 const message = await response.json()
 
-                if (message.error === true) {
+                if (message.result === false) {
                     // show again edit pop up
                     const messageError = document.querySelector('#message-error')
-                    messageError.textContent = 'Fill all fields with correct information!'
+                    messageError.textContent = message.message
 
                 } else {
                     // close pop up and refresh page to see changes

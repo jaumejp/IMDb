@@ -22,11 +22,12 @@ session_start();
     if (! $validator->validate($editForm)) {
         // Incorrect inputs:
         $error = array(
-            "error" => true
+            "result" => false,
+            "message" => $validator->message
         );
 
         echo(json_encode($error));
-        exit;
+        exit; 
         
     } else {
         // Inputs correct, edit  BBDD:
@@ -47,7 +48,8 @@ session_start();
         $editMovie->editMovie($_POST["movie-id"], $_POST["title"], $_POST["description"], $_POST["rating"], $image, $_POST["resume"], $_POST["director-name"], $_POST["tags"], $screenShots);
         
         $error = array(
-            "error" => false
+            "result" => true,
+            "message" => $validator->message
         );
 
         echo(json_encode($error));
