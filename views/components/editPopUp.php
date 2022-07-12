@@ -1,5 +1,6 @@
 
 <form method="post" enctype='multipart/form-data' action="/movies/update" id="edit-movie-form">
+    <h4 style="color: red; text-align: center" id="message-error"></h4>
 
     <label for="">Movie title</label>
     <input id='title' name="title"></input>
@@ -30,7 +31,7 @@
         <?php foreach($listOfGenres as $genre) : ?>
             <div>
                 <label for=""><?= $genre ?></label>
-                <input type="checkbox" value="<?= $genre ?>" name="tags[]"></input>
+                <input class="genreList" type="checkbox" value="<?= $genre ?>" name="tags[]"></input>
             </div>
         <?php endforeach ?>
     </div>

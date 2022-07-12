@@ -35,6 +35,8 @@
 
     $router->get('api/show', 'Controllers/API/Movies/ShowController.php');
 
+    $router->post('api/update', 'Controllers/API/Movies/UpdateController.php');
+
     //
 
     $router->get('notFound', 'views/notFound.view.php');

@@ -17,6 +17,7 @@ export function openDeletePopUp(e) {
     document.querySelector('#name-verification').textContent = movieName
     
     deletePopUp.show()
+    //deletePopUp.showRandomId()
 }
 
 export function openEditPopUp(e) {
@@ -81,6 +82,9 @@ export function openEditPopUp(e) {
         // Any previous selected image or screen shot
         document.querySelector('#cover-image').value = null;
         document.querySelector('#screen-shot').value = null;
+
+        // Delete previous error messsages:
+        document.querySelector('#message-error').textContent = ''
 
         editPopUp.show()
     }

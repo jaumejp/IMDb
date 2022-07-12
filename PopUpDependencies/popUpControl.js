@@ -2,6 +2,11 @@
 class PopUp {
     constructor(id) {
         this.id = `#${id}`
+        this.randomId = Math.random()
+    }
+
+    showRandomId() {
+        alert(this.randomId)
     }
 
     show() {
@@ -16,3 +21,4 @@ class PopUp {
 
 export const deletePopUp = new PopUp("delete-pop-up")
 export const editPopUp = new PopUp("edit-pop-up")
+
