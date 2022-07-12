@@ -27,7 +27,7 @@
     </select>
 
     <label for="">Genres:</label>
-    <div class="genres-container"> 
+    <div class="genres-container-edit-pop-up"> 
         <?php foreach($listOfGenres as $genre) : ?>
             <div>
                 <label for=""><?= $genre ?></label>
