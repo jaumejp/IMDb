@@ -1,4 +1,4 @@
-import { showPopUp  } from "../../PopUpDependencies/popUpControl.js";
+import { deletePopUp, editPopUp  } from "../../PopUpDependencies/popUpControl.js";
 
 export function openDeletePopUp(e) {
     e.preventDefault()
@@ -16,7 +16,7 @@ export function openDeletePopUp(e) {
     const movieName = elementClicked.parentNode.parentNode.parentNode.querySelector('.title').textContent
     document.querySelector('#name-verification').textContent = movieName
     
-    showPopUp('#delete-pop-up') 
+    deletePopUp.show()
 }
 
 export function openEditPopUp(e) {
@@ -82,7 +82,7 @@ export function openEditPopUp(e) {
         document.querySelector('#cover-image').value = null;
         document.querySelector('#screen-shot').value = null;
 
-        showPopUp('#edit-pop-up') 
+        editPopUp.show()
     }
 
     getMovieToEdit(e, movieId)  

@@ -1,4 +1,4 @@
-import { closePopUp } from "../../PopUpDependencies/popUpControl.js";
+import { deletePopUp } from "../../PopUpDependencies/popUpControl.js";
 import { createEndPoint, fetchDataFrom } from "./fetch.js";
 import { openDeletePopUp, openEditPopUp } from "./popUp.js";
 
@@ -25,7 +25,7 @@ export async function deleteMovie(e) {
  
     await fetch(`http://imbd.test/api/delete?id=${movieId}`)
 
-    closePopUp('#delete-pop-up')
+    deletePopUp.close()
 
     showMoviesFromFilters(e)
     
@@ -111,7 +111,7 @@ function createMovieCards(movies) {
 
 
     // Events to open delete pop up: 
-    document.querySelectorAll('.btn.edit').forEach(btn => btn.addEventListener('click', (e) => {
+    document.querySelectorAll('.btn.delete').forEach(btn => btn.addEventListener('click', (e) => {
         openDeletePopUp(e)
     }))
 
