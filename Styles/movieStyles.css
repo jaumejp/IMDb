@@ -23,7 +23,7 @@ section {
 .info .description {
     text-align: justify;
     height: 350px;
-    overflow-y: scroll;
+    overflow: auto;
 }
 .info .description h3 {
     margin-bottom: 10px;

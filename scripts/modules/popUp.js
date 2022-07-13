@@ -1,4 +1,3 @@
-import { deletePopUp, editPopUp  } from "../../PopUpDependencies/popUpControl.js";
 
 export function openDeletePopUp(e) {
     e.preventDefault()
@@ -16,8 +15,10 @@ export function openDeletePopUp(e) {
     const movieName = elementClicked.parentNode.parentNode.parentNode.querySelector('.title').textContent
     document.querySelector('#name-verification').textContent = movieName
     
-    deletePopUp.show()
-    //deletePopUp.showRandomId()
+    // Custom Event to Open Delete PopUp
+    const openEvent = new CustomEvent('show-delete-pop-up')
+    document.querySelector('#delete-pop-up').dispatchEvent(openEvent)
+  
 }
 
 export function openEditPopUp(e) {
@@ -86,7 +87,9 @@ export function openEditPopUp(e) {
         // Delete previous error messsages:
         document.querySelector('#message-error').textContent = ''
 
-        editPopUp.show()
+        // Open edit pop up
+        const openEvent = new CustomEvent('show-edit-pop-up')
+        document.querySelector('#edit-pop-up').dispatchEvent(openEvent)
     }
 
     getMovieToEdit(e, movieId)  

@@ -1,8 +1,15 @@
 import { showMoviesFromFilters, showAllMovies, deleteMovie } from "./modules/cardsControl.js";
-import { deletePopUp, editPopUp } from "../PopUpDependencies/popUpControl.js";
+import { PopUp } from "../PopUpDependencies/popUpControl.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+
+    const deletePopUp = new PopUp("delete-pop-up")
+    const editPopUp = new PopUp("edit-pop-up")
+
+    // Close pop up
+    document.querySelector('#delete-pop-up').addEventListener('close-delete-pop-up', () => {deletePopUp.close()})
+    document.querySelector('#edit-pop-up').addEventListener('close-edit-pop-up', () => {editPopUp.close()})
+
 
     async function displayContent() {
         console.log("DOM Loaded")
@@ -17,12 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Event to close delete pop up
         document.querySelector('#delete-movie-cancel').addEventListener('click', () => { 
-            deletePopUp.close()
-            //deletePopUp.showRandomId()
+            const closeEvent = new CustomEvent('close-delete-pop-up')
+            document.querySelector('#delete-pop-up').dispatchEvent(closeEvent)
         })
 
         // Event to close edit pop up 
-        document.querySelector('#close-edit-form').addEventListener('click', () => { editPopUp.close() })
+        document.querySelector('#close-edit-form').addEventListener('click', () => { 
+            const closeEvent = new CustomEvent('close-edit-pop-up')
+            document.querySelector('#edit-pop-up').dispatchEvent(closeEvent)
+         })
 
         // Event to submit edit pop up
         document.querySelector('#edit-movie-form').addEventListener('submit', (e) => { 

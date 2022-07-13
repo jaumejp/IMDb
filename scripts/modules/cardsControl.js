@@ -1,4 +1,3 @@
-import { deletePopUp } from "../../PopUpDependencies/popUpControl.js";
 import { createEndPoint, fetchDataFrom } from "./fetch.js";
 import { openDeletePopUp, openEditPopUp } from "./popUp.js";
 
@@ -25,7 +24,10 @@ export async function deleteMovie(e) {
  
     await fetch(`http://imbd.test/api/delete?id=${movieId}`)
 
-    deletePopUp.close()
+    document.querySelector('#delete-movie-cancel').addEventListener('click', () => { 
+        const closeEvent = new CustomEvent('close-delete-pop-up')
+        document.querySelector('#delete-pop-up').dispatchEvent(closeEvent)
+    })
 
     showMoviesFromFilters(e)
     

@@ -53,4 +53,4 @@
 
 </form> 
 
-<button class="btn" id="close-edit-form">Cancel</button>
+<button class="btn" id="close-edit-form" data-close-modal="edit-pop-up">Cancel</button>
