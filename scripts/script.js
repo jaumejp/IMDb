@@ -18,16 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#delete-movie-ok').addEventListener('click', (e) => { deleteMovie(e) })
 
         // Event to close delete pop up
-        document.querySelector('#delete-movie-cancel').addEventListener('click', () => { 
-            const closeEvent = new CustomEvent('close-delete-pop-up')
-            document.querySelector('#delete-pop-up').dispatchEvent(closeEvent)
-        })
+        // document.querySelector('#delete-movie-cancel').addEventListener('click', () => { 
+        //     const closeEvent = new CustomEvent('close-delete-pop-up')
+        //     document.querySelector('#delete-pop-up').dispatchEvent(closeEvent)
+        // })
 
         // Event to close edit pop up 
-        document.querySelector('#close-edit-form').addEventListener('click', () => { 
-            const closeEvent = new CustomEvent('close-edit-pop-up')
-            document.querySelector('#edit-pop-up').dispatchEvent(closeEvent)
-         })
+        // document.querySelector('#close-edit-form').addEventListener('click', () => { 
+        //     const closeEvent = new CustomEvent('close-edit-pop-up')
+        //     document.querySelector('#edit-pop-up').dispatchEvent(closeEvent)
+        //  })
 
         // Event to submit edit pop up
         document.querySelector('#edit-movie-form').addEventListener('submit', (e) => { 
@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // close pop up and refresh page to see changes
                     const closeEvent = new CustomEvent('close-edit-pop-up')
                     document.querySelector('#edit-pop-up').dispatchEvent(closeEvent)
+                    
                     showMoviesFromFilters(e)
                 }
             }

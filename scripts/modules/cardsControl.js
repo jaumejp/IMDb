@@ -4,9 +4,15 @@ import { openDeletePopUp, openEditPopUp } from "./popUp.js";
 export function showMoviesFromFilters(e) {
     e.preventDefault();
     async function showFilteredMovies() {
-         const endPoint = createEndPoint()
-         const movies = await fetchDataFrom(endPoint);
-         display(movies)
+        const endPoint = createEndPoint()
+        const movies = await fetchDataFrom(endPoint);
+
+        const filterBy = document.querySelector("filter-by").selected;
+        console.log(filterBy)
+
+        movies.sort((obj1, obj2) => obj2.title - obj1.title)
+        console.log(movies)
+        display(movies)
      }
      showFilteredMovies()
 
@@ -96,7 +102,7 @@ function createMovieCards(movies) {
         if (movie.rating < 5) {
             movieCard.querySelector('.rating').style.backgroundColor = 'lightcoral'
         }
-        
+
         if (movie.rating >= 5 && movie.rating < 8) {
             movieCard.querySelector('.rating').style.backgroundColor = 'gold'
         }

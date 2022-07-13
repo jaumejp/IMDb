@@ -80,13 +80,15 @@
                 </div>
 
                 <!-- Order By -->
-                <label for="">Director's Name:</label>
-                <select name="director-name" id="movie-directors">
-                    <option selected value="">None</option>
-                    <?php foreach($listOfDirectors as $director) : ?>
-                    <option value="<?= $director ?>" <?= ($director == $selectedFilters["director"]) ? "selected" : ''; ?> > <?= $director ?> </option>
-                    <?php endforeach ?>
-                </select> 
+                <div>
+                    <label for="">Filter by:</label>
+                    <select id="filter-by">
+                        <option selected value="">None</option>
+                        <option value="rating">Rating</option>
+                        <option value="name">Name</option>
+                        <option value="reverse-name">Reverse name</option>
+                    </select> 
+                </div>
 
                 <div>
                     <button type="submit" class="btn" >Search</button>
@@ -142,12 +144,14 @@
         <div class="pop-up-container" id="delete-pop-up">
             <div class="pop-up pop-up-delete">
                 <?php require 'views/components/deletePopUp.php' ?>
+                
             </div>
         </div>
         <!--Edit Pop up-->
         <div class="pop-up-container" id="edit-pop-up">
             <div class="pop-up pop-up-edit">
                 <?php require 'views/components/editPopUp.php' ?>
+
             </div>
         </div>
 

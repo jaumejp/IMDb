@@ -5,5 +5,5 @@
     <p>You will delete: <span class="delete-message" id="name-verification">movie-title</span>.</p>
     <div>
         <button class="btn" id="delete-movie-ok">Accept</button>
-        <button class="btn" id="delete-movie-cancel">Cancel</button>
+        <button class="btn" id="delete-movie-cancel" data-close-modal="close-delete-pop-up">Cancel</button>
     </div>
