@@ -79,6 +79,15 @@
                     </div>
                 </div>
 
+                <!-- Order By -->
+                <label for="">Director's Name:</label>
+                <select name="director-name" id="movie-directors">
+                    <option selected value="">None</option>
+                    <?php foreach($listOfDirectors as $director) : ?>
+                    <option value="<?= $director ?>" <?= ($director == $selectedFilters["director"]) ? "selected" : ''; ?> > <?= $director ?> </option>
+                    <?php endforeach ?>
+                </select> 
+
                 <div>
                     <button type="submit" class="btn" >Search</button>
                     <button type="button" class="btn"><a href="./movies/create">Add Movie</a></button>

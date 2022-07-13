@@ -92,6 +92,17 @@ function createMovieCards(movies) {
         }
 
         movieCard.querySelector('.rating').textContent = movie.rating
+
+        if (movie.rating < 5) {
+            movieCard.querySelector('.rating').style.backgroundColor = 'lightcoral'
+        }
+        
+        if (movie.rating >= 5 && movie.rating < 8) {
+            movieCard.querySelector('.rating').style.backgroundColor = 'gold'
+        }
+        
+
+
         movieCard.querySelector('.description p').textContent = movie.description
 
         movieCard.querySelector('.buttons .delete').dataset.movid = movie.id

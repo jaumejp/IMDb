@@ -42,6 +42,9 @@ export function openEditPopUp(e) {
         document.querySelector('#edit-movie-form #resume').value = movie[0].resume;
         document.querySelector('#edit-movie-form #description').value = movie[0].description;
         document.querySelector('#edit-movie-form #rating').value = movie[0].rating;
+        
+        document.querySelector('#rating-output').value = movie[0].rating
+
         const directors = document.querySelectorAll('#edit-movie-form #director-name option')
 
         const directorsList = [...document.querySelectorAll('#edit-movie-form #director-name option')].map(option => option.value)

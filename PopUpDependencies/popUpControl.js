@@ -8,11 +8,12 @@ export class PopUp {
         document.querySelector(`#${id}`).addEventListener(`show-${id}`, () => {this.show()})
         document.querySelector(`#${id}`).addEventListener(`close-${id}`, () => {this.close()})
 
+        //foreach de tots els elements que tinguin data-close-modal=IDdelmodal afegir un event listener del click del botó que executi mostrar
+        
         // Custom events listeners to close edit pop up.
         // Estic creant això també quan no s'ha de crear, amb el delete.
         //document.querySelectorAll('[data-close-modal="edit-pop-up"]').forEach(btn => () => { alert(btn) })
         
-        //foreach de tots els elements que tinguin data-close-modal=IDdelmodal afegir un event listener del click del botó que executi mostrar
     }
 
     showRandomId() {

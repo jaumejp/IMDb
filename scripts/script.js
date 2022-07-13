@@ -3,8 +3,8 @@ import { PopUp } from "../PopUpDependencies/popUpControl.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const deletePopUp = new PopUp("delete-pop-up")
-    const editPopUp = new PopUp("edit-pop-up")
+    new PopUp("delete-pop-up")
+    new PopUp("edit-pop-up")
 
     async function displayContent() {
         console.log("DOM Loaded")

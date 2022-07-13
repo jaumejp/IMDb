@@ -12,8 +12,8 @@
     <textarea id='description' name="description" rows="4" cols="50"></textarea>
 
     <label for="">Rating</label>
-    <input id="rating" type="range" min="0" max="10" step="0.1" name="rating" value = "" ></input>
-    <output>0</output>
+    <input id="rating" type="range" min="0" max="10" step="0.1" name="rating" value = "" onInput="this.nextElementSibling.value = this.value"></input>
+    <output id="rating-output">0</output>
 
     <label for="">Cover Image</label>
     <input id="cover-image" type="file" name="cover-image">
