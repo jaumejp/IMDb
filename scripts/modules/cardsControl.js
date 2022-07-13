@@ -24,10 +24,8 @@ export async function deleteMovie(e) {
  
     await fetch(`http://imbd.test/api/delete?id=${movieId}`)
 
-    document.querySelector('#delete-movie-cancel').addEventListener('click', () => { 
-        const closeEvent = new CustomEvent('close-delete-pop-up')
-        document.querySelector('#delete-pop-up').dispatchEvent(closeEvent)
-    })
+    const closeEvent = new CustomEvent('close-delete-pop-up')
+    document.querySelector('#delete-pop-up').dispatchEvent(closeEvent)
 
     showMoviesFromFilters(e)
     

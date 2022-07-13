@@ -6,11 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const deletePopUp = new PopUp("delete-pop-up")
     const editPopUp = new PopUp("edit-pop-up")
 
-    // Close pop up
-    document.querySelector('#delete-pop-up').addEventListener('close-delete-pop-up', () => {deletePopUp.close()})
-    document.querySelector('#edit-pop-up').addEventListener('close-edit-pop-up', () => {editPopUp.close()})
-
-
     async function displayContent() {
         console.log("DOM Loaded")
 
@@ -53,7 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 } else {
                     // close pop up and refresh page to see changes
-                    editPopUp.close()
+                    const closeEvent = new CustomEvent('close-edit-pop-up')
+                    document.querySelector('#edit-pop-up').dispatchEvent(closeEvent)
                     showMoviesFromFilters(e)
                 }
             }
