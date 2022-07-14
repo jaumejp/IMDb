@@ -4,7 +4,8 @@
         display: flex;
         flex-direction:column;
         gap: 0.5em;
-        width: 200px;
+        width: 500px;
+        margin: auto;
     }
     .genres-container {
         display: grid;
@@ -36,7 +37,7 @@
     <textarea name="description" rows="4" cols="50"><?= $showInfo ?? '' ? $movie[0]->getDescription() : '' ?></textarea>
 
     <label for="">Rating</label>
-    <input type="range" min="0" max="10" step="0.1" name="rating" value = " <?= $showInfo ? $movie[0]->getRating() : '0' ?> " ></input>
+    <input type="range" min="0" max="10" step="0.1" name="rating" value = " <?= $showInfo ? $movie[0]->getRating() : '0' ?> " onInput="this.nextElementSibling.value = this.value"></input>
     <output><?= $showInfo ?? '' ? $movie[0]->getRating() : '0' ?></output>
 
     <label for="">Cover Image</label>

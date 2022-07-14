@@ -3,6 +3,7 @@ form {
     flex-direction:column;
     gap: 0.3em;
 }
+
 .genres-container-edit-pop-up {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
