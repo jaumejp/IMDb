@@ -7,11 +7,22 @@ export function showMoviesFromFilters(e) {
         const endPoint = createEndPoint()
         const movies = await fetchDataFrom(endPoint);
 
-        const filterBy = document.querySelector("filter-by").selected;
-        console.log(filterBy)
-
-        movies.sort((obj1, obj2) => obj2.title - obj1.title)
-        console.log(movies)
+        // const orderBy = document.querySelector("#order-by").value;
+        // console.log(orderBy)
+        // switch (orderBy) {
+        //     case 'rating': 
+        //         movies.sort((first, second) => second.score - first.score)
+        //         break; 
+        
+        //     case 'name':
+        //         movies.sort((first, second) => first.title.localeCompare(second.title))
+        //         break; 
+        
+        //     case 'reverse-name':
+        //         movies.sort((first, second) => -first.title.localeCompare(second.title))
+        //         break;
+        // }
+        
         display(movies)
      }
      showFilteredMovies()

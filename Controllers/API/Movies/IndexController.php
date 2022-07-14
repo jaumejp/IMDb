@@ -6,6 +6,7 @@
     // Capturar les dades que ens envien ($_GET), http://imbd.test/api/movies?movies=all&title=tenet
     //var_dump($_GET["tags"]); die();
 
+    
 
     // Fer algun select que ens doni una resposta del que volem mostrar de la BBDD:
     require 'database/dataBaseConnection.php';
@@ -38,6 +39,7 @@
         $directorName = $_GET['director-name'] ?? '';
         $rating = ''; 
         $genres = '';
+        $orderBy = $_GET['order-by'] ?? '';
 
         $firstCondition = false;
         if (isset($_GET["rating"])) {
@@ -68,7 +70,8 @@
             "title" => $title,
             "directorName" => $directorName,
             "rating" => $rating,
-            "genres" => $genres
+            "genres" => $genres,
+            'orderBy' => $orderBy,
         );
         
         return $data;
@@ -96,7 +99,20 @@
             $query = "SELECT * FROM movies WHERE ";
             $query .= implode(' and ', $conditionals);
         }
-        return $query;   
+
+        if (!empty($data["orderBy"])) {
+            $order = 'asc';
+
+            if ($data['orderBy'] == 'rating') {
+                $order = 'desc';
+            }
+
+            $query = $query . " order by " . $data['orderBy'] . ' ' . $order; 
+        }
+
+        return $query;  
+        
+        
         
     }
     // These two functions are helpers for getData()

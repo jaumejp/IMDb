@@ -81,12 +81,11 @@
 
                 <!-- Order By -->
                 <div>
-                    <label for="">Filter by:</label>
-                    <select id="filter-by">
+                    <label for="">Order by:</label>
+                    <select id="order-by">
                         <option selected value="">None</option>
                         <option value="rating">Rating</option>
-                        <option value="name">Name</option>
-                        <option value="reverse-name">Reverse name</option>
+                        <option value="title">Name</option>
                     </select> 
                 </div>
 
@@ -144,7 +143,7 @@
         <div class="pop-up-container" id="delete-pop-up">
             <div class="pop-up pop-up-delete">
                 <?php require 'views/components/deletePopUp.php' ?>
-                
+
             </div>
         </div>
         <!--Edit Pop up-->

@@ -35,5 +35,9 @@ export function createEndPoint() {
         }
     } 
 
+    // Add Rating to the endPoint: 
+    const orderBy = document.querySelector("#order-by").value
+    endPoint += `&order-by=${orderBy}`
+
     return endPoint
 }
