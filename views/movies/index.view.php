@@ -1,5 +1,13 @@
 
     <?php require 'components/header.php' ?>
+    <link rel="stylesheet" href="../Styles/cardStyles.css">
+    <link rel="stylesheet" href="../../PopUpDependencies/popUpStyles.css"> 
+    <link rel="stylesheet" href="../Styles/deletePopUp.css">
+    <link rel="stylesheet" href="../Styles/editPopUp.css">
+    
+
+    <script src="../../scripts/script.js" type="module"></script>
+    <script src="../../PopUpDependencies/popUpControl.js" type="module"></script>
 
     <!--Content of the website-->
     <main>

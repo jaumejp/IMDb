@@ -1,19 +1,25 @@
+import { movieRepo } from "../repositories/MovieRepository.js";
+
+
 
 export function openDeletePopUp(e) {
     e.preventDefault()
 
+    // Button of delete clicked:
     const elementClicked = e.target 
-
-    if (!elementClicked.classList.contains('delete')) return false;
-
-    // Add data-attribut for moveId: 
+    
+    // Add data-attribut of the movie to delete: 
     const movieId = elementClicked.dataset.movid
 
-    // Get reference to movie pop up container
+    // Fill information of the pop Up
+    // Put the movieId reference to pop up container:
     document.querySelector('#movie-id').dataset.movid = movieId;
-
+    
     const movieName = elementClicked.parentNode.parentNode.parentNode.querySelector('.title').textContent
     document.querySelector('#name-verification').textContent = movieName
+
+    // Delete possible previous error message: 
+    document.querySelector('#delete-message-error').textContent = ''
     
     // Custom Event to Open Delete PopUp
     const openEvent = new CustomEvent('show-delete-pop-up')
@@ -24,20 +30,19 @@ export function openDeletePopUp(e) {
 export function openEditPopUp(e) {
     e.preventDefault()
 
+    // Button of Edit clicked:
     const elementClicked = e.target 
 
-    if (!elementClicked.classList.contains('edit')) return false;
-
+    // Get movie id to edit:
     const movieId = elementClicked.dataset.movid
 
     // Get info from movie clicked
-    async function getMovieToEdit(e, movieId) {       
-        const response = await fetch(`http://imbd.test/api/show?id=${movieId}`)
+    async function getMovieToEdit(e, movieId) {     
 
-        const movie = await response.json();
+        // Make get request to server
+        const movie = await movieRepo.get(movieId)
 
         // Fill pop up template with those data: 
-        
         document.querySelector('#edit-movie-form #title').value = movie[0].title;
         document.querySelector('#edit-movie-form #resume').value = movie[0].resume;
         document.querySelector('#edit-movie-form #description').value = movie[0].description;

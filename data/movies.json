@@ -3,21 +3,21 @@
         "title": "Tenet",
         "resume": "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
         "description": "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
-        "score": "7.3",
+        "score": "8.3",
         "director": "Christopher Nolan",
         "cover": "https://pics.filmaffinity.com/Tenet-432994986-large.jpg",
         "genres": ["Action", "Adventure", "Sci-Fi", "Thriller"],
-        "screenshots": ["Screen1", "Screen2"]
+        "screenshots": ["https://pics.filmaffinity.com/Tenet-432994986-large.jpg", "https://pics.filmaffinity.com/Tenet-432994986-large.jpg"]
     },
     {
         "title": "Mononoke-hime",
         "resume": "On a journey to find the cure for a Tatarigami's curse, Ashitaka finds himself in the middle of a war between the forest gods and Tatara, a mining colony. In this quest he also meets San, the Mononoke Hime.",
         "description": "On a journey to find the cure for a Tatarigami's curse, Ashitaka finds himself in the middle of a war between the forest gods and Tatara, a mining colony. In this quest he also meets San, the Mononoke Hime.",
-        "score": "8.4",
+        "score": "3.5",
         "director": "Hayao Miyazaki",
         "cover": "https://images-na.ssl-images-amazon.com/images/I/61srT9QM+lL.jpg",
         "genres": ["Animation", "Adventure", "Fantasy"],
-        "screenshots": ["Screen1", "Screen2"]
+        "screenshots": ["https://pics.filmaffinity.com/Tenet-432994986-large.jpg", "https://pics.filmaffinity.com/Tenet-432994986-large.jpg"]
     },
     {
         "title": "Avatar",
@@ -27,6 +27,6 @@
         "director": "James Cameron",
         "cover": "https://pics.filmaffinity.com/Avatar-265462659-large.jpg",
         "genres": ["Action", "Adventure", "Fantasy", "Sci-Fi"],
-        "screenshots": ["Screen1", "Screen2"]
+        "screenshots": ["https://pics.filmaffinity.com/Tenet-432994986-large.jpg", "https://pics.filmaffinity.com/Tenet-432994986-large.jpg"]
     }
 ]

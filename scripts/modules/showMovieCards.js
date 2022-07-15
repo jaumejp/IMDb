@@ -58,9 +58,10 @@ function createMovieCards(movies) {
             // Add genre to <ul> genres-list
             ul.appendChild(li)
         }
-
+        
         movieCard.querySelector('.rating').textContent = movie.rating
 
+        // Change colors of rating
         if (movie.rating < 5) {
             movieCard.querySelector('.rating').style.backgroundColor = 'lightcoral'
         }

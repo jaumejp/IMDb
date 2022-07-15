@@ -28,7 +28,6 @@
 
 
     function createJsonMessage($isMovieDeleted, $message, $data) {
-        $jsonData = array();
 
         $movieAux = array(
             'result' => $isMovieDeleted,
@@ -36,9 +35,7 @@
             'data' => $data,
         );
         
-        $jsonData[] = $movieAux;
-
-        return json_encode($jsonData);
+        return json_encode($movieAux);
 
     
     }

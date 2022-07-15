@@ -25,9 +25,11 @@ class MovieRepository
         return response
     }
     
-    // async get(id) {
-
-    // }
+    async get(id) {
+        const response = await fetch(`http://imbd.test/api/show?id=${id}`)
+        const movie = await response.json();
+        return movie
+    }
 
 }
 

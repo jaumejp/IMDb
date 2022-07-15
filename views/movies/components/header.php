@@ -6,15 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMDb</title>
     <link rel="stylesheet" href="../Styles/generalStyles.css">
-    <link rel="stylesheet" href="../Styles/cardStyles.css">
     <link rel="stylesheet" href="../Styles/genresStyles.css"> 
-    <link rel="stylesheet" href="../../PopUpDependencies/popUpStyles.css"> 
-    <link rel="stylesheet" href="../Styles/deletePopUp.css">
-    <link rel="stylesheet" href="../Styles/editPopUp.css">
-    <link rel="stylesheet" href="../Styles/movieStyles.css">
 
-    <script src="../../scripts/script.js" type="module"></script>
-    <script src="../../PopUpDependencies/popUpControl.js" type="module"></script>
+
 
     <style>
         /* Desde l'arxiu css no funciona */

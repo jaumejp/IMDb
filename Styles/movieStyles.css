@@ -22,7 +22,6 @@
 
 .movie-info .movie-description {
     text-align: justify;
-    height: 350px;
     overflow: auto;
 }
 .movie-info .movie-description h3 {

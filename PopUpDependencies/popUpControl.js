@@ -8,7 +8,7 @@ export class PopUp {
         document.querySelector(`#${id}`).addEventListener(`show-${id}`, () => {this.show()})
         document.querySelector(`#${id}`).addEventListener(`close-${id}`, () => {this.close()})
 
-        // Close Pop Up when click cancel button
+        // Close Pop Up when click button with the data-atribute: data-close-modal="close-XXX"
         document.querySelectorAll(`[data-close-modal="close-${id}"]`).forEach(btn => { 
             btn.addEventListener('click', () => {
                 this.close()

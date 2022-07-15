@@ -4,14 +4,12 @@ import { showMoviesFromFilters } from "./createMovieCards.js"
 
 export async function deleteMovie(e) {     
 
-    // Get id from data atributes on the pop up container
-    
+    // Get id from data atributes on the pop up container:
     const movieId = document.querySelector('#movie-id').dataset.movid
  
-    // await fetch(`http://imbd.test/api/delete?id=${movieId}`)
+    // Make a delete request to server:
     const response = await movieRepo.delete(movieId)
 
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Aquí tenim el mateix que a edit, pero canviant parametres, fer una funció!!!!!!!!!!!!!!!!!!!1
     if (response.result === false) {
         const messageError = document.querySelector('#delete-message-error')
         messageError.textContent = response.message

@@ -216,10 +216,15 @@
 
             }
 
-            //$this->message = "<span>" . $movieTitle . "</span>" . " deleted correctly!";
-            $this->message = "Movie deleted correctly";
+            if ($statement->rowCount() == 1) {
+                $this->message = "Movie deleted correctly";
+                return true;
+            } else {
+                $this->message = "An error occurred! Movie has not been deleted";
+                return false;
+            }
 
-            return true;
+            //$this->message = "<span>" . $movieTitle . "</span>" . " deleted correctly!";
         }   
 
         // Given the id of the movie, returns the movie title
