@@ -1,20 +1,20 @@
 <?php
 
-    function fetchGenres($conn) {
+    // function fetchGenres($conn) {
 
-        // List of Genres
+    //     // List of Genres
 
-        $statement = $conn->prepare("SELECT * FROM genres"); 
-        $statement->execute(); 
+    //     $statement = $conn->prepare("SELECT * FROM genres"); 
+    //     $statement->execute(); 
 
-        $listOfGenres = array();
+    //     $listOfGenres = array();
 
-        $genres = $statement->fetchAll();
+    //     $genres = $statement->fetchAll();
 
-        // while ($movie = $statement->fetch()) {
-        foreach ($genres as $genre) { 
-            $listOfGenres[] = $genre["genere"];
-        }   
+    //     // while ($movie = $statement->fetch()) {
+    //     foreach ($genres as $genre) { 
+    //         $listOfGenres[] = $genre["genere"];
+    //     }   
 
-        return $listOfGenres;
-    }
+    //     return $listOfGenres;
+    // }

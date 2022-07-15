@@ -3,16 +3,23 @@
     session_start();
     // Requires necessaris
     require 'database/dataBaseConnection.php';
-    require 'database/fetchDirectors.php'; 
-    require 'database/fetchGenres.php'; 
+    // require 'database/fetchDirectors.php'; 
+    // require 'database/fetchGenres.php'; 
     require 'Support/FilterValidator.php';
     require 'Support/MovieService.php';
     require 'Support/MovieRepository.php'; 
 
     $conn = createConectionToDB();
 
-    $listOfDirectors = fetchDirectors($conn);
-    $listOfGenres = fetchGenres($conn);
+    // require 'database/fetchGenres.php'; 
+    // $listOfGenres = fetchGenres($conn);
+    require 'Support/GenresRepository.php';
+    $listOfGenres = (new GenreRepository($conn))->getGenres();
+
+    // require 'database/fetchDirectors.php'; 
+    // $listOfDirectors = fetchDirectors($conn);
+    require 'Support/DirectorsRepository.php';
+    $listOfDirectors = (new DirectorsRepository($conn))->getDirectors();
 
     // Create validator object:
     $validator = new FilterValidator($listOfDirectors, $listOfGenres);

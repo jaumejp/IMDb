@@ -3,13 +3,19 @@
    require 'database/dataBaseConnection.php';
    require 'Support/MovieRepository.php'; 
    require 'Support/MovieService.php'; 
-   require 'database/fetchDirectors.php'; 
-   require 'database/fetchGenres.php'; 
 
    // Get connexion to database and list of directors and genres
    $conn = createConectionToDB();
-   $listOfDirectors = fetchDirectors($conn);
-   $listOfGenres = fetchGenres($conn);
+
+    // require 'database/fetchGenres.php'; 
+    // $listOfGenres = fetchGenres($conn);
+    require 'Support/GenresRepository.php';
+    $listOfGenres = (new GenreRepository($conn))->getGenres();
+
+    // require 'database/fetchDirectors.php'; 
+    // $listOfDirectors = fetchDirectors($conn);
+    require 'Support/DirectorsRepository.php';
+    $listOfDirectors = (new DirectorsRepository($conn))->getDirectors();
 
    // Get info from the id given by the url:
    $fetchMovie = (new MovieRepository($conn))->getMovieFromDirectorId($_GET["id"]);
