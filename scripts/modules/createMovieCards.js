@@ -1,13 +1,19 @@
+import { movieRepo } from "../repositories/MovieRepository.js";
+import { display } from "./showMovieCards.js";
 
-
-export async function fetchDataFrom(endPoint) {
-    const response = await fetch(endPoint)
-    const movies = await response.json()
-
-    return  movies;
+export async function showAllMovies() {
+    const movies = await movieRepo.getAll()
+    display(movies)
 }
 
-export function createEndPoint() {
+export async function showMoviesFromFilters() {
+    const endPoint = createEndPoint()
+    const movies = await movieRepo.getDataFrom(endPoint);
+    
+    display(movies)
+}
+
+function createEndPoint() {
     // Get filtes from searcher card and add the info to end point: 
     let endPoint = 'http://imbd.test/api/movies?'
     
@@ -41,3 +47,6 @@ export function createEndPoint() {
 
     return endPoint
 }
+     
+
+

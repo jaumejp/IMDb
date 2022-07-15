@@ -88,7 +88,7 @@ export function openEditPopUp(e) {
         document.querySelector('#screen-shot').value = null;
 
         // Delete previous error messsages:
-        document.querySelector('#message-error').textContent = ''
+        document.querySelector('#edit-message-error').textContent = ''
 
         // Open edit pop up
         const openEvent = new CustomEvent('show-edit-pop-up')

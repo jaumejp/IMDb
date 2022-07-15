@@ -1,55 +1,6 @@
-import { createEndPoint, fetchDataFrom } from "./fetch.js";
 import { openDeletePopUp, openEditPopUp } from "./popUp.js";
 
-export function showMoviesFromFilters(e) {
-    e.preventDefault();
-    async function showFilteredMovies() {
-        const endPoint = createEndPoint()
-        const movies = await fetchDataFrom(endPoint);
-
-        // const orderBy = document.querySelector("#order-by").value;
-        // console.log(orderBy)
-        // switch (orderBy) {
-        //     case 'rating': 
-        //         movies.sort((first, second) => second.score - first.score)
-        //         break; 
-        
-        //     case 'name':
-        //         movies.sort((first, second) => first.title.localeCompare(second.title))
-        //         break; 
-        
-        //     case 'reverse-name':
-        //         movies.sort((first, second) => -first.title.localeCompare(second.title))
-        //         break;
-        // }
-        
-        display(movies)
-     }
-     showFilteredMovies()
-
-}
-export async function showAllMovies() {
-    const movies = await fetchDataFrom('http://imbd.test/api/movies');
-    display(movies)
-}
-
-export async function deleteMovie(e) {     
-
-    // Get id from data atributes on the pop up container
-    
-    const movieId = document.querySelector('#movie-id').dataset.movid
- 
-    await fetch(`http://imbd.test/api/delete?id=${movieId}`)
-
-    const closeEvent = new CustomEvent('close-delete-pop-up')
-    document.querySelector('#delete-pop-up').dispatchEvent(closeEvent)
-
-    showMoviesFromFilters(e)
-    
-}
-
-
-function display(movies) {
+export function display(movies) {
 
     if (movies.length === 0) {
         noMoviesFounded()

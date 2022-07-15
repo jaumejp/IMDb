@@ -191,7 +191,7 @@
         // These function deletes a movie. returns true if the execution goes correctly. False for any error.
         public function deleteMovie($id) {
             // Get title of the movie:
-            $movieTitle = $this->getMovieTitleOf($id);
+            //$movieTitle = $this->getMovieTitleOf($id);
 
             try {
                 // delete screen_shots
@@ -208,6 +208,7 @@
                 $statement = $this->conn->prepare("DELETE FROM movies WHERE id = :movie_id");
                 $statement->bindParam(":movie_id", $id);
                 $statement->execute(); 
+                
             } catch (Exception $e) {
                 //$this->message = "An error occurred!";
                 $this->message = "An error occurred! Movie has not been deleted";
