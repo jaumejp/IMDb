@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../Styles/editPopUp.css">
     
 
-    <script src="../../scripts/script.js" type="module"></script>
+    <script src="../../scripts/moviesList.js" type="module"></script>
     <script src="../../PopUpDependencies/popUpControl.js" type="module"></script>
 
     <!--Content of the website-->
