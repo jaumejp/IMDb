@@ -1,0 +1,284 @@
+/*
+===========================================================================
+Movie and Searcher Cards Styles
+===========================================================================
+*/
+
+section {
+    padding: 0 150px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.movie-card {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24) ;
+    width: 100%;
+}
+.searcher-card {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24) ;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    gap: 1em;
+    padding: 15px;
+}
+
+.generes {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 0.1fr 0.5fr);
+    gap: 0.2em;
+}
+
+
+.main img {
+    width: 100px;
+    border-radius: 15px;
+    padding: 0;
+    margin-right: 30px;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    margin: 15px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.title {
+    font: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 25px;
+    font-weight: normal;   
+}
+
+/* .genres ul {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+.genres ul li {
+    list-style: none;
+    border: 1px solid #aaa;
+    padding: 3px 9px;
+    font-size: smaller;
+    border-radius: 15px;
+    color: #aaa;
+} */
+
+.rating {
+    background-color: lightgreen;
+    color: #fff;
+    padding: 3px 9px;
+    border-radius: 15px;
+    width: fit-content;
+}
+
+.description {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.description p {
+    text-align: justify;
+}
+
+.searcher-container input,
+.searcher-card select,
+.pop-up input {
+    padding: 4px 12px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+}
+
+.btn {
+    background-color: lightcoral;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+.btn-delete {
+    background-color: white;
+    color: lightcoral;
+    border: 2px solid lightcoral;
+    font-size: 16px;
+}
+.btn-create {
+    background-color: white;
+    color: lightskyblue;
+    border: 2px solid lightskyblue;
+    font-size: 16px;
+
+}
+.btn:hover {
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.24) ;
+}
+
+.searcher-container input.btn {
+    border: none;
+}
+
+.btn a {
+    text-decoration: none;
+    color: #fff;
+}
+
+
+section.pop-up-container,
+section.create-movie {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pop-up-container,
+.create-movie {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #0009;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.pop-up-container.show,
+.create-movie.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.pop-up {
+    position: fixed;
+    background-color: #fff;
+    width: 800px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 3px 8px rgba(255,255,255, 0.24) ;
+}
+
+.btn-close {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 2%;
+    left: 96%;
+    cursor: pointer;
+}
+
+.delete-message {
+    font-weight: bold;
+}
+
+.pop-up-title {
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: 2px solid #0002;
+}
+
+.delete-title {
+    background-color: lightgoldenrodyellow;
+}
+
+.pop-up-container.show .success {
+    border: 1px solid lightgreen;
+}
+
+.pop-up-container.show .wrong {
+    border: 1px solid lightcoral;
+}
+
+/*
+===========================================================================
+
+===========================================================================
+*/
+
+@media (max-width: 1270px) {
+    .movie-card {
+        grid-template-columns: 1fr;
+        margin: 0;
+        gap: 0;
+    }
+    section {
+        padding: 20px;
+    }
+    .movie-card .main {
+        flex-direction: column;
+        align-items: center;
+    }
+    .info {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    /* .genres ul {
+        justify-content: center;
+        align-items: center;
+    } */
+    .movie-card img {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .description {
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* Mobile Searcher section */
+
+    .searcher-card {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+    .searcher-card img {
+        margin: 0;
+    }
+
+    /* nav ul {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+    } */
+}
+
